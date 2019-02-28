@@ -8,119 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fba9cac9-0749-408c-8ead-04f9c3b92e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DemoServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/ApplicationProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/ApplicationRunner/ApplicationRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Dispatcher/Dispatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Dispatcher/EndPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Dispatcher/EnhancedHttpExchange.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Dispatcher/PathVariableResolverManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Dispatcher/RequestMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Exceptions/BadRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/Exceptions/UnAuthorized.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Core/SolutionsApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Data/Entity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Data/EntityManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Data/EntityRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Data/Exceptions/EntityNotFound.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Data/ModelRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Controller/ControllerParameterResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Controller/HtmlController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Controller/PathVariable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Controller/RequestMapping.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Controller/RequestParam.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Parsers/EntityObjectIdResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Solutions/Presentation/Parsers/PathVariableResolvers/EntityControllerParameterResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Exceptions/BidExceptions/BudgetOverflow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Exceptions/BidExceptions/IllegalBidException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Exceptions/BidExceptions/InsufficientSkill.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/HttpClient/HttpGetClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/Auction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/Bid.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/Knowledge.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/Skill.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Models/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Presentation/Controllers/ProjectController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Presentation/Controllers/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Repositories/BidRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Repositories/KnowledgeRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Repositories/ProjectRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Repositories/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Seeds/DefaultUserSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Seeds/KnowledgeSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Seeds/ProjectSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Services/BidService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Services/ProjectService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ir/joboona/Services/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/project-single.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/projects.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/user.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/DemoServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/ApplicationProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/ApplicationRunner/ApplicationRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Dispatcher/Dispatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Dispatcher/EndPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Dispatcher/EnhancedHttpExchange.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Dispatcher/PathVariableResolverManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Dispatcher/RequestMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Exceptions/BadRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/Exceptions/UnAuthorized.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Core/SolutionsApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Data/Entity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Data/EntityManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Data/EntityRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Data/Exceptions/EntityNotFound.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Data/ModelRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Controller/ControllerParameterResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Controller/HtmlController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Controller/PathVariable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Controller/RequestMapping.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Controller/RequestParam.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Parsers/EntityObjectIdResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/Solutions/Presentation/Parsers/PathVariableResolvers/EntityControllerParameterResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Exceptions/BidExceptions/BudgetOverflow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Exceptions/BidExceptions/IllegalBidException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Exceptions/BidExceptions/InsufficientSkill.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/HttpClient/HttpGetClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/Auction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/Bid.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/Knowledge.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/Skill.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Models/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Presentation/Controllers/ProjectController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Presentation/Controllers/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Repositories/BidRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Repositories/KnowledgeRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Repositories/ProjectRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Repositories/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Seeds/DefaultUserSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Seeds/KnowledgeSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Seeds/ProjectSeed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Services/BidService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Services/ProjectService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/ir/joboona/Services/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/templates/project-single.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/templates/projects.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/classes/templates/user.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/commons-lang3-3.8.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/guava-20.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/jackson-annotations-2.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/jackson-core-2.9.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/jackson-databind-2.9.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/javassist-3.21.0-GA.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/jsoup-1.11.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/reflections-0.9.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/spring-core-5.1.4.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/lib/spring-jcl-5.1.4.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/jobOnja/index.jsp" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -356,7 +243,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551375326897" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551375565182" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -482,18 +369,18 @@
       <option name="presentableId" value="Default" />
       <updated>1551182074023</updated>
       <workItem from="1551182078843" duration="1331000" />
-      <workItem from="1551372964109" duration="2111000" />
+      <workItem from="1551372964109" duration="2339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3442000" />
+    <option name="totallyTimeSpent" value="3670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -510,7 +397,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32891566" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32891566" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
