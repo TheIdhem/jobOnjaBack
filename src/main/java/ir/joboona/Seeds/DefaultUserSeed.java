@@ -43,6 +43,30 @@ public class DefaultUserSeed implements ApplicationRunner {
                 "https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F04%2Fayatollah-khamenei.jpg&w=800&c=sc&poi=face&q=85"
         );
 
+        User user1 = new User(
+                "2",
+                "محمد رضا",
+                "یزدانیفر",
+                of(new Skill(html, 5), new Skill(js, 4),
+                        new Skill(cpp, 2), new Skill(java, 3)).collect(toSet()),
+                "برنامه نویس وب",
+                "آبجکت",
+                "https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F04%2Fayatollah-khamenei.jpg&w=800&c=sc&poi=face&q=85"
+        );
+
+        User user2 = new User(
+                "3",
+                "گلناز",
+                "ادیب",
+                of(new Skill(html, 5), new Skill(js, 4),
+                        new Skill(cpp, 2), new Skill(java, 3)).collect(toSet()),
+                "برنامه نویس وب",
+                "عبداالله",
+                "https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F04%2Fayatollah-khamenei.jpg&w=800&c=sc&poi=face&q=85"
+        );
+
+        userRepository.save(user1);
+        userRepository.save(user2);
         userRepository.save(user);
 
     }

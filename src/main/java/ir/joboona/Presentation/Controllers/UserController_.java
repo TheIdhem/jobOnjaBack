@@ -23,12 +23,18 @@ public class UserController_ extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userId = this.tokenizerWithDelimeter(request.getRequestURI(), "/user");
-        Optional<User> user = userRepo.getById(userId);
-        request.setAttribute("user", user.get());
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user.jsp");
-        Set<Knowledge> kn = user.get().getRetardSkill();
-        dispatcher.forward(request, response);
+        try {
+            String userId = this.tokenizerWithDelimeter(request.getRequestURI(), "/user");
+            Optional<User> user = userRepo.getById(userId);
+            request.setAttribute("user", user.get());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user.jsp");
+            dispatcher.forward(request, response);
+        } catch (Exception ex) {
+            Set<User> users = userRepo.getAll();
+            request.setAttribute("users",users);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_info.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     protected void doPost(
