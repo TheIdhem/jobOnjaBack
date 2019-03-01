@@ -37,13 +37,14 @@ public class User implements Entity {
         this.skills = new HashSet<>();
     }
 
-    public User(String id, String firstName, String lastName, Set<Skill> skills, String jobTitle, String bio) {
+    public User(String id, String firstName, String lastName, Set<Skill> skills, String jobTitle, String bio,String profilePictureURL) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.skills = skills;
         this.jobTitle = jobTitle;
         this.bio = bio;
+        this.profilePictureURL = profilePictureURL;
     }
 
     @Override

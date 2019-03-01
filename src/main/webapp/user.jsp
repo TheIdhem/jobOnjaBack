@@ -21,6 +21,10 @@
     </li>
 
     <li>
+        image : <img src="${requestScope.user.getProfilePictureURL()}" style="width: 300px; height: 300;"/>
+    </li>
+
+    <li>
         last_name : <c:out value="${requestScope.user.getLastName()}"/>
     </li>
 

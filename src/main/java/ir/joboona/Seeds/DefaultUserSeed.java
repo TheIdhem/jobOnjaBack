@@ -39,7 +39,8 @@ public class DefaultUserSeed implements ApplicationRunner {
                 of(new Skill(html, 5), new Skill(js, 4),
                         new Skill(cpp, 2), new Skill(java, 3)).collect(toSet()),
                 "برنامه نویس وب",
-                "روی سنگ قبرم بنویسید: خدابیامرز میخواست خیلی کار بکنه ولی پول نداشت"
+                "روی سنگ قبرم بنویسید: خدابیامرز میخواست خیلی کار بکنه ولی پول نداشت",
+                "https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F04%2Fayatollah-khamenei.jpg&w=800&c=sc&poi=face&q=85"
         );
 
         userRepository.save(user);
