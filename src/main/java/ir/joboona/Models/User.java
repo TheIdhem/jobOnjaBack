@@ -4,10 +4,13 @@ import Solutions.Data.Entity;
 import Solutions.Presentation.Parsers.EntityObjectIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import ir.joboona.Repositories.KnowledgeRepository;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id", scope = User.class, resolver = EntityObjectIdResolver.class)
@@ -27,6 +30,8 @@ public class User implements Entity {
     private String profilePictureURL;
 
     private String bio;
+
+    private final KnowledgeRepository knowledgeRepository = KnowledgeRepository.getInstance();
 
     public User() {
         this.skills = new HashSet<>();
@@ -53,7 +58,6 @@ public class User implements Entity {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 
 
     public Set<Skill> getSkills() {
@@ -113,7 +117,27 @@ public class User implements Entity {
         this.id = id;
     }
 
-    public void deleteSkill(Skill skill){
+    public void deleteSkill(Skill skill) {
         this.skills.remove(skill);
+    }
+
+    public Set<Knowledge> getRetardSkill() {
+        Set<Knowledge> knowledges = new HashSet<>();
+        for (Skill skill : this.skills) {
+            knowledges.add(skill.getKnowledge());
+        }
+
+        Set<Knowledge> mainKnowledge = new HashSet<>();
+        for (Knowledge knowledge : knowledgeRepository.getAll())
+            mainKnowledge.add(knowledge);
+
+        mainKnowledge.removeAll(knowledges);
+
+        return mainKnowledge;
+
+    }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
     }
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Mehdi to yek kooni hast</title>
+    <title>user info</title>
 </head>
 <body>
 <ul>
@@ -54,6 +54,25 @@
             </c:forEach>
         </ul>
     </li>
+
+    <form action="user" method="post">
+        <label>
+            add skill
+        </label>
+        <select name="knowledge">
+
+            <c:forEach var="knowledge" items="${requestScope.user.getRetardSkill()}">
+                <option>
+                    <c:out value="${knowledge.getName()}"/>
+                </option>
+            </c:forEach>
+
+
+        </select>
+        <button> add</button>
+        <input type="hidden" name="method" value="addSkill">
+        <input type="hidden" name="userId" value="${requestScope.user.getId()}">
+    </form>
 
 </ul>
 

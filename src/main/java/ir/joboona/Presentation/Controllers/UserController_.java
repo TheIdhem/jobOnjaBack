@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 @WebServlet(value = "/user/*")
@@ -22,11 +23,11 @@ public class UserController_ extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String kossher = request.getMethod();
         String userId = this.tokenizerWithDelimeter(request.getRequestURI(), "/user");
         Optional<User> user = userRepo.getById(userId);
         request.setAttribute("user", user.get());
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user.jsp");
+        Set<Knowledge> kn = user.get().getRetardSkill();
         dispatcher.forward(request, response);
     }
 
@@ -35,21 +36,26 @@ public class UserController_ extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String method = request.getParameter("method");
+        String userId = request.getParameter("userId");
+        User user = userRepo.getById(userId).get();
         if (method.equals("deleteSkill")) {
 
-            String userId = request.getParameter("userId");
             String point = request.getParameter("point");
             String skillName = request.getParameter("name");
 
             Knowledge knowledge = new Knowledge(skillName);
             Skill skill = new Skill(knowledge, Integer.parseInt(point));
 
-            Optional<User> user = userRepo.getById(userId);
-            user.get().deleteSkill(skill);
+            user.deleteSkill(skill);
 
-            response.sendRedirect("/user/" + userId);
-
+        } else if (method.equals("addSkill")) {
+            String knowledgeName = request.getParameter("knowledge");
+            Knowledge knowledge = new Knowledge(knowledgeName);
+            Skill skill = new Skill(knowledge, 0);
+            user.addSkill(skill);
         }
+        response.sendRedirect("/user/" + userId);
+
     }
 
 
