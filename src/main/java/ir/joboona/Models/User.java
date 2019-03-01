@@ -112,4 +112,8 @@ public class User implements Entity {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void deleteSkill(Skill skill){
+        this.skills.remove(skill);
+    }
 }
