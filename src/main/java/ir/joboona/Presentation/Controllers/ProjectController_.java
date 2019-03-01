@@ -6,6 +6,7 @@ import ir.joboona.Models.User;
 import ir.joboona.Repositories.ProjectRepository;
 import ir.joboona.Repositories.UserRepository;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +33,11 @@ public class ProjectController_ extends HttpServlet {
 
         Set<Project> projects = projectRepository.getAll().stream()
                 .filter(project -> project.sufficientSkills(user.get().getSkills())).collect(toSet());
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<h3>Hello World!</h3>");
+        request.setAttribute("projects", projects);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/projects.jsp");
+        dispatcher.forward(request,response);
+//        response.setContentType("text/html");
+//        PrintWriter out = response.getWriter();
+//        out.println("<h3>Hello World!</h3>");
     }
 }
