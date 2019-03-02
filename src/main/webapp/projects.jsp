@@ -32,7 +32,11 @@
     </tr>
     <c:forEach var="project" items="${requestScope.projects}">
         <tr>
-            <td><c:out value="${project.getId()}"/></td>
+            <td>
+                <a href="/project?projectId=${project.getId()}&userId=${requestScope.user.getId()}">
+                    <c:out value="${project.getId()}"/>
+                </a>
+            </td>
             <td dir="rtl"><c:out value="${project.getTitle()}"/></td>
             <td>${project.getBudget()}</td>
         </tr>

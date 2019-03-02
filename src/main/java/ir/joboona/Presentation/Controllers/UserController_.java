@@ -59,14 +59,6 @@ public class UserController_ extends HttpServlet {
                 Skill skill = new Skill(knowledge, 0);
                 user.addSkill(skill);
                 response.sendRedirect("/user/profile/" + userId);
-            } else if (method.equals("endorseSkill")) {
-                String point = request.getParameter("point");
-                String skillName = request.getParameter("name");
-
-                Knowledge knowledge = new Knowledge(skillName);
-                Skill skill = new Skill(knowledge, Integer.parseInt(point));
-                user.endorseSkill(skill, user);
-                response.sendRedirect("/user?userId=" + userId);
             }
         }catch (Exception ex){
             this.badRequest(request,response);

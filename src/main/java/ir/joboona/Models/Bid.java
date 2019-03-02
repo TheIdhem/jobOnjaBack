@@ -12,6 +12,12 @@ public class Bid {
 
     private Integer bidAmount;
 
+    public Bid(User biddingUser, Project project, Integer bidAmount) {
+        this.biddingUser = biddingUser;
+        this.project = project;
+        this.bidAmount = bidAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
