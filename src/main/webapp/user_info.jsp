@@ -32,8 +32,9 @@
     <c:forEach var="user" items="${requestScope.users}">
         <tr>
             <td>
-                <a href="/user/${user.getId()}">
+                <a href="/user/info?userId=${user.getId()}">
                     <c:out value="${user.getId()}"/>
+                    <input type="hidden" name="method" value="endorseSkill">
                 </a>
             </td>
             <td dir="rtl"><c:out value="${user.getFirstName()}"/></td>

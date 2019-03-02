@@ -141,4 +141,16 @@ public class User implements Entity {
     public void addSkill(Skill skill) {
         this.skills.add(skill);
     }
+
+    public void endorseSkill(Skill skill, User user) {
+        Skill skillRight = this.skills.stream().filter(skill::equals).findAny().orElse(null);
+        if(!skillRight.getUsersEndorsed().contains(user)){
+            skillRight.setPoints(skillRight.getPoint() + 1);
+            skillRight.setUserEndorsed(user);
+        }
+        else {
+            skillRight.setPoints(skillRight.getPoint() -1);
+            skillRight.deleteUserEndorsed(user);
+        }
+    }
 }
