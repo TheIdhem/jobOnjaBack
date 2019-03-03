@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @WebServlet("/project")
 public class ProjectController_ extends HttpServlet {
@@ -25,9 +28,11 @@ public class ProjectController_ extends HttpServlet {
         try {
             Project project = projectRepository.getById(request.getParameter("projectId")).get();
             User user = userRepo.getById(request.getParameter("userId")).get();
-
+            Set<User> usersEndorsed = project.getBids().stream().map(bid -> bid.getBiddingUser()).collect(Collectors.toSet());
+            Boolean isBided = usersEndorsed.contains(user);
             request.setAttribute("project", project);
             request.setAttribute("user", user);
+            request.setAttribute("isBided", isBided);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/project.jsp");
             dispatcher.forward(request, response);
         } catch (Exception ex) {

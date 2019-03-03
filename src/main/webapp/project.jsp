@@ -45,14 +45,16 @@
         </ul>
     </li>
 
-    <form action="project" method="post">
-        <li>
-            <input type="number" name="bid">
-            <button> bid </button>
-            <input type="hidden" name="projectId" value="${requestScope.project.getId()}">
-            <input type="hidden" name="userId" value="${requestScope.user.getId()}">
-        </li>
-    </form>
+    <c:if test="${!requestScope.isBided}">
+        <form action="project" method="post">
+            <li>
+                <input type="number" name="bid">
+                <button> bid</button>
+                <input type="hidden" name="projectId" value="${requestScope.project.getId()}">
+                <input type="hidden" name="userId" value="${requestScope.user.getId()}">
+            </li>
+        </form>
+    </c:if>
 
 </ul>
 

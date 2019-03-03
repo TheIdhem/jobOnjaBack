@@ -23,12 +23,22 @@ public class UsersController extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            User user  = userRepo.getById(request.getParameter("userId")).get();
+        try {
+            User user = userRepo.getById(request.getParameter("userId")).get();
             Set<User> users = userRepo.getAll();
             request.setAttribute("users", users);
-            request.setAttribute("user",user);
+            request.setAttribute("user", user);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_info.jsp");
             dispatcher.forward(request, response);
+        }catch (Exception ex){
+            this.badRequest(request,response);
+        }
+
+    }
+
+    private void badRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/bad_request.jsp");
+        dispatcher.forward(request, response);
     }
 
 
