@@ -154,7 +154,13 @@ public class Project implements Entity {
     }
 
     public void addBid(Bid bid) {
-        bids.add(bid);
+        Boolean isBided = false;
+        for (Bid bidIt : this.bids) {
+            if(bid.getBiddingUser().equals(bidIt.getBiddingUser()))
+                isBided = true;
+        }
+        if(!isBided)
+            this.bids.add(bid);
     }
 
     public void setId(String id) {
