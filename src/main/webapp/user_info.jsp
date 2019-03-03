@@ -31,12 +31,24 @@
     </tr>
     <c:forEach var="user" items="${requestScope.users}">
         <tr>
-            <td>
-                <a href="/user/info?userId=${user.getId()}">
-                    <c:out value="${user.getId()}"/>
-                    <input type="hidden" name="method" value="endorseSkill">
-                </a>
-            </td>
+            <c:choose>
+                <c:when test="${!requestScope.user.getId().equals(user.getId())}">
+                    <td>
+                    <a href="/user/info?userId=${user.getId()}">
+                        <c:out value="${user.getId()}"/>
+                        <input type="hidden" name="method" value="endorseSkill">
+                    </a>
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td>
+                    <a href="/user/profile/${user.getId()}">
+                        <c:out value="${user.getId()}"/>
+                        <input type="hidden" name="method" value="endorseSkill">
+                    </a>
+                    </td>
+                </c:otherwise>
+            </c:choose>
             <td dir="rtl"><c:out value="${user.getFirstName()}"/></td>
             <td dir="rtl">${user.getBio()}</td>
         </tr>

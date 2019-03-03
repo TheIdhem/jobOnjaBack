@@ -23,8 +23,10 @@ public class UsersController extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            User user  = userRepo.getById(request.getParameter("userId")).get();
             Set<User> users = userRepo.getAll();
             request.setAttribute("users", users);
+            request.setAttribute("user",user);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user_info.jsp");
             dispatcher.forward(request, response);
     }
