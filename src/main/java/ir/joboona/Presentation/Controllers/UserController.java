@@ -1,26 +1,38 @@
 package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
-import Solutions.Presentation.Controller.HtmlController;
-import Solutions.Presentation.Controller.PathVariable;
-import Solutions.Presentation.Controller.RequestMapping;
+import Solutions.Presentation.Controller.*;
+import ir.joboona.Models.Knowledge;
+import ir.joboona.Models.Skill;
 import ir.joboona.Models.User;
+import ir.joboona.Repositories.UserRepository;
+import ir.joboona.Services.UserService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.util.Set;
 
-@HtmlController(basePath = "/user")
+
+@RestController(basePath = "/user")
 public class UserController {
 
-    @RequestMapping(path = "/{userId}", method = RequestMethod.GET, template = "user.html")
-    public void get(@PathVariable(value = "userId") User user, Document document) {
+    private final UserRepository userRepository;
 
-        Element ul = document.selectFirst("ul");
-        ul.child(0).append(user.getId());
-        ul.child(1).append(user.getFirstName());
-        ul.child(2).append(user.getJobTitle());
-        ul.child(3).append(user.getJobTitle());
-        ul.child(4).append(user.getBio());
-
+    public UserController() {
+        userRepository = UserRepository.getInstance();
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public Set<User> show() {
+
+        return userRepository.getAll();
+    }
+
+    @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
+    public User get(@PathVariable(value = "userId") User user) {
+        return user;
+    }
+
+
+
 }

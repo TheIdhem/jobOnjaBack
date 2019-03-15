@@ -3,7 +3,6 @@ package ir.joboona.Models;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,19 +13,9 @@ public class Skill {
     @JsonIdentityReference(alwaysAsId = true)
     private Knowledge knowledge;
 
-    @JsonProperty(required = true)
-    private Integer point;
+    private Integer point = 0;
 
-    private Set<User> usersEndorsed;
-
-
-    public Integer getPoint() {
-        return point;
-    }
-
-    public void setPoint(Integer point) {
-        this.point = point;
-    }
+    private Set<User> usersEndorsed = new HashSet<>();
 
     public Set<User> getUsersEndorsed() {
         return usersEndorsed;
@@ -36,21 +25,20 @@ public class Skill {
         this.usersEndorsed = usersEndorsed;
     }
 
-    public void setUserEndorsed(User user){
+    public void addEndorser(User user){
         this.usersEndorsed.add(user);
     }
 
-    public void deleteUserEndorsed(User user){
+    public void removeEndorser(User user){
         this.usersEndorsed.remove(user);
     }
 
     public Skill() {
     }
 
-    public Skill(Knowledge knowledge, Integer points) {
+    public Skill(Knowledge knowledge, Integer point) {
         this.knowledge = knowledge;
-        this.point = points;
-        this.usersEndorsed = new HashSet<>();
+        this.point = point;
     }
 
     public Knowledge getKnowledge() {
@@ -61,12 +49,12 @@ public class Skill {
         this.knowledge = knowledge;
     }
 
-    public Integer getPoints() {
+    public Integer getPoint() {
         return point;
     }
 
-    public void setPoints(Integer points) {
-        this.point = points;
+    public void setPoint(Integer point) {
+        this.point = point;
     }
 
     @Override

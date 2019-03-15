@@ -1,12 +1,12 @@
 package Solutions.Core.Dispatcher;
 
-import Solutions.Core.Exceptions.BadRequest;
+import Solutions.Core.Exceptions.MissingParameter;
 import Solutions.Data.Exceptions.EntityNotFound;
 import Solutions.Presentation.Controller.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.InputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -27,6 +27,7 @@ class EndPoint {
     private List<String> variableIds;
     private Method method;
     private Object controllerInstance;
+    private ObjectMapper objectMapper;
 
 
     EndPoint(Method method, Object controllerInstance) throws ReflectiveOperationException {
@@ -38,6 +39,7 @@ class EndPoint {
 
         initialVariableIds();
         regex = generateRegex();
+        objectMapper = new ObjectMapper();
 
 
     }
@@ -114,11 +116,9 @@ class EndPoint {
         return resolver.resolve(var, context).orElse(null);
     }
 
-    String invoke(EnhancedHttpExchange httpExchange) throws Throwable {
+    String invoke(HttpServletRequest req, HttpServletResponse resp) throws Throwable {
 
-        Document document = null;
-
-        Map<String, Object> valuations = getValuations(httpExchange.getRequestURI().getPath());
+        Map<String, Object> valuations = getValuations(req.getRequestURI());
 
         Object args[] = new Object[method.getParameterCount()];
 
@@ -137,31 +137,28 @@ class EndPoint {
             } else if (parameter.isAnnotationPresent(RequestParam.class)) {
                 RequestParam requestParam = parameter.getAnnotation(RequestParam.class);
 
-                if (httpExchange.getQueryParam(requestParam.value()) == null) {
+                if (req.getParameter(requestParam.value()) == null) {
                     if (requestParam.required())
-                        throw new BadRequest(requestParam.value());
+                        throw new MissingParameter(requestParam.value());
                     else
                         args[i] = null;
                 } else {
-                    args[i] = convert(httpExchange.getQueryParam(requestParam.value()), parameter.getType());
+                    args[i] = convert(req.getParameter(requestParam.value()), parameter.getType());
                     if (args[i] == null)
                         throw new EntityNotFound();
                 }
-            } else if (parameter.getType().equals(Document.class))
-                args[i] = document = Jsoup.parse(getTemplate(), "UTF-8", "");
-            else
+            }else if (parameter.isAnnotationPresent(RequestBody.class)) {
+
+                args[i] = objectMapper.readValue(req.getReader(), parameter.getType());
+            } else
                 throw new RuntimeException("Unexpected parameter for method.");
         }
         try {
-            method.invoke(controllerInstance, args);
+            Object result = method.invoke(controllerInstance, args);
+            return objectMapper.writeValueAsString(result);
         } catch (InvocationTargetException e) {
             throw e.getTargetException();
         }
-
-
-        if (document != null)
-            return document.html();
-        return null;
     }
 
     int getPriority() {
@@ -169,18 +166,12 @@ class EndPoint {
     }
 
     private String getPath() {
-        return method.getDeclaringClass().getAnnotation(HtmlController.class).basePath() +
+        return method.getDeclaringClass().getAnnotation(RestController.class).basePath() +
                 method.getAnnotation(RequestMapping.class).path();
     }
 
     private RequestMethod getRequestMethod() {
         return method.getAnnotation(RequestMapping.class).method();
-    }
-
-    private InputStream getTemplate() {
-
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        return loader.getResourceAsStream("templates/" + method.getAnnotation(RequestMapping.class).template());
     }
 
 }

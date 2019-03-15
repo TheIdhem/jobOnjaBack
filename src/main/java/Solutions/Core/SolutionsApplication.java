@@ -28,16 +28,6 @@ public class SolutionsApplication {
         ApplicationProperties.init();
         this.runApplicationRunners();
 
-        this.startServer();
-
-    }
-
-    private void startServer() throws IOException, ReflectiveOperationException {
-        Integer port = Integer.valueOf(ApplicationProperties.getInstance().getProperty("solutions.port"));
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", Dispatcher.getInstance());
-        server.setExecutor(null);
-        server.start();
     }
 
     private void runApplicationRunners() throws Exception {

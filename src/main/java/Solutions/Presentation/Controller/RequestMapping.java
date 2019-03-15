@@ -12,8 +12,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(value = RUNTIME)
 public @interface RequestMapping {
     String path() default "";
-
-    String template();
-
     RequestMethod method();
 }

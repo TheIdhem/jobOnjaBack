@@ -48,8 +48,8 @@ public class Project implements Entity {
 
         double result = 0;
         for (Skill skill : this.skills) {
-            Integer required = skill.getPoints();
-            Integer actual = skillMap.get(skill.getKnowledge()).getPoints();
+            Integer required = skill.getPoint();
+            Integer actual = skillMap.get(skill.getKnowledge()).getPoint();
             result += 10000 * pow((actual - required), 2);
         }
         result += budget - offer;
@@ -64,7 +64,7 @@ public class Project implements Entity {
         Map<Knowledge, Skill> skillMap = actualSkills.stream().collect(toMap(Skill::getKnowledge, Function.identity()));
 
         return this.skills.stream().allMatch(skill ->
-                skillMap.get(skill.getKnowledge()).getPoints() >= skill.getPoints()
+                skillMap.get(skill.getKnowledge()).getPoint() >= skill.getPoint()
         );
 
     }

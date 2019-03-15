@@ -1,15 +1,19 @@
 package Solutions.Core.Dispatcher;
 
 import Solutions.Core.ApplicationProperties;
-import Solutions.Core.Exceptions.BadRequest;
+import Solutions.Core.Exceptions.IllegalFormat;
+import Solutions.Core.Exceptions.MissingParameter;
 import Solutions.Core.Exceptions.UnAuthorized;
 import Solutions.Data.Exceptions.EntityNotFound;
-import Solutions.Presentation.Controller.HtmlController;
+import Solutions.Presentation.Controller.RestController;
 import Solutions.Presentation.Controller.RequestMapping;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import org.reflections.Reflections;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -20,60 +24,50 @@ import static java.util.Arrays.stream;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toSet;
 
+@WebServlet("/*")
+public class Dispatcher extends HttpServlet {
 
-public class Dispatcher implements HttpHandler {
-
-    private static Dispatcher instance;
     private Set<EndPoint> endPoints;
 
-    private Dispatcher() throws ReflectiveOperationException {
+    public Dispatcher() throws ReflectiveOperationException {
         endPoints = new HashSet<>();
         addHandlers(ApplicationProperties.getInstance().getProperty("solutions.controller.base_package"));
     }
 
-    public static Dispatcher getInstance() throws ReflectiveOperationException {
-        if (instance == null)
-            instance = new Dispatcher();
-        return instance;
-    }
 
-    @Override
-    public void handle(HttpExchange _httpExchange) throws IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        EnhancedHttpExchange httpExchange = new EnhancedHttpExchange(_httpExchange);
-
-        RequestMethod requestMethod = RequestMethod.valueOf(httpExchange.getRequestMethod());
-        String path = httpExchange.getRequestURI().getPath();
-
+        RequestMethod requestMethod = RequestMethod.valueOf(req.getMethod());
+        String path = req.getRequestURI();
         Optional<EndPoint> handler = endPoints.stream().sorted(comparing(EndPoint::getPriority))
                 .filter(endPoint -> endPoint.matches(requestMethod, path)).findFirst();
         String response;
         if (!handler.isPresent()) {
             response = "Page not found";
-            httpExchange.sendResponseHeaders(404, response.getBytes().length);
+            resp.setStatus(404);
         } else {
 
             try {
-                response = handler.get().invoke(httpExchange);
-                httpExchange.sendResponseHeaders(200, response.getBytes().length);
+                response = handler.get().invoke(req, resp);
+                resp.setStatus(200);
             } catch (UnAuthorized e) {
                 response = "Un-authorized: " + e.getMessage();
-                httpExchange.sendResponseHeaders(403, response.getBytes().length);
+                resp.setStatus(403);
             } catch (EntityNotFound e1) {
-                response = "UNPROCESSABLE ENTITY";
-                httpExchange.sendResponseHeaders(422, response.getBytes().length);
-            } catch (BadRequest e2) {
+                response = "Unprocessable entity";
+                resp.setStatus(422);
+            } catch (MissingParameter | IllegalFormat e2) {
                 response = e2.getMessage();
-                httpExchange.sendResponseHeaders(400, response.getBytes().length);
-            } catch (Throwable e3) {
+                resp.setStatus(400);
+            }catch (Throwable e3) {
                 response = "An error occurred.";
-                httpExchange.sendResponseHeaders(500, response.getBytes().length);
+                resp.setStatus(500);
                 e3.printStackTrace();
             }
         }
 
-        httpExchange.getResponseBody().write(response.getBytes());
-        httpExchange.getResponseBody().close();
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.getWriter().write(response);
     }
 
 
@@ -81,7 +75,7 @@ public class Dispatcher implements HttpHandler {
 
         Reflections reflections = new Reflections(basePackage);
 
-        Set<Class<?>> controllerClasses = reflections.getTypesAnnotatedWith(HtmlController.class);
+        Set<Class<?>> controllerClasses = reflections.getTypesAnnotatedWith(RestController.class);
 
         for (Class<?> clazz : controllerClasses) {
             Object controllerInstance = clazz.getDeclaredConstructor().newInstance();
