@@ -26,11 +26,13 @@ public class Skill {
     }
 
     public void addEndorser(User user){
-        this.usersEndorsed.add(user);
+        if(this.usersEndorsed.add(user))
+            point++;
     }
 
     public void removeEndorser(User user){
-        this.usersEndorsed.remove(user);
+        if(this.usersEndorsed.remove(user))
+            point--;
     }
 
     public Skill() {
