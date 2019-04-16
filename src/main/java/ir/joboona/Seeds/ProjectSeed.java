@@ -1,6 +1,7 @@
 package ir.joboona.Seeds;
 
 import Solutions.Core.ApplicationRunner.ApplicationRunner;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import ir.joboona.HttpClient.HttpGetClient;
@@ -16,6 +17,7 @@ public class ProjectSeed implements ApplicationRunner {
     @Override
     public void run() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         TypeFactory typeFactory = objectMapper.getTypeFactory();
 
         Set<Project> projects = objectMapper.
