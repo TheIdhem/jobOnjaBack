@@ -1,11 +1,11 @@
 package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
-import Solutions.Core.Exceptions.UnAuthorized;
 import Solutions.Presentation.Controller.RestController;
 import Solutions.Presentation.Controller.PathVariable;
 import Solutions.Presentation.Controller.RequestMapping;
 import Solutions.Presentation.Controller.RequestParam;
+import ir.joboona.Exceptions.BidExceptions.Common.Unauthorized;
 import ir.joboona.Models.Bid;
 import ir.joboona.Models.Project;
 import ir.joboona.Models.User;
@@ -13,7 +13,6 @@ import ir.joboona.Presentation.Controllers.Presentation.Dtos.ProjectDto;
 import ir.joboona.Repositories.ProjectRepository;
 import java.util.Set;
 
-import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toSet;
 
 @RestController(basePath = "/project")
@@ -36,7 +35,7 @@ public class ProjectController {
                           @RequestParam(value = "userId", required = true) User user) {
 
         if (!project.sufficientSkills(user.getSkills()))
-            throw new UnAuthorized("You don't have enough skills.");
+            throw new Unauthorized("شما مهارتهای لازم برای مشاهده این پروژه را ندارید.");
 
         return new ProjectDto(isUserBidding(project, user), project);
     }

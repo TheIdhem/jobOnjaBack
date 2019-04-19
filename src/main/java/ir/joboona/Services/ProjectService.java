@@ -35,7 +35,7 @@ public class ProjectService {
 
         return bids.stream().max(comparing(bid ->
                 project.evaluateSkillsAndOffers(bid.getBiddingUser().getSkills(), bid.getBidAmount())
-        )).orElseThrow(EntityNotFound::new);
+        )).orElseThrow(() -> new EntityNotFound(Project.class, project.getId()));
     }
 
 }

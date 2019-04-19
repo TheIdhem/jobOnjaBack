@@ -16,7 +16,7 @@ public class EndorsementController {
                             @RequestBody Knowledge knowledge){
 
         Skill skill = endorsee.getSkills().stream().filter(eachSkill -> eachSkill.getKnowledge().equals(knowledge))
-                .findFirst().orElseThrow(EntityNotFound::new);
+                .findFirst().orElseThrow(() -> new EntityNotFound(Skill.class, knowledge.getName()));
 
         skill.addEndorser(endorser);
         return new SkillDto(skill, endorser);
@@ -27,7 +27,7 @@ public class EndorsementController {
                          @RequestBody Knowledge knowledge){
 
         Skill skill = endorsee.getSkills().stream().filter(eachSkill -> eachSkill.getKnowledge().equals(knowledge))
-                .findFirst().orElseThrow(EntityNotFound::new);
+                .findFirst().orElseThrow(() -> new EntityNotFound(Skill.class, knowledge.getName()));
 
         skill.removeEndorser(endorser);
         return new SkillDto(skill, endorser);

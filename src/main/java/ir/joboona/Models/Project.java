@@ -5,6 +5,8 @@ import Solutions.Presentation.Parsers.EntityObjectIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import ir.joboona.Exceptions.BidExceptions.BudgetOverflow;
+import ir.joboona.Exceptions.BidExceptions.InsufficientSkill;
 
 import java.util.*;
 import java.util.function.Function;
@@ -29,7 +31,7 @@ public class Project implements Entity {
 
     private Set<Skill> skills = new HashSet<>();
 
-    private List<Bid> bids = new ArrayList<>();
+    private Set<Bid> bids = new HashSet<>();
 
     @JsonProperty(required = true)
     private Integer budget;
@@ -129,11 +131,11 @@ public class Project implements Entity {
         this.imageUrl = imageUrl;
     }
 
-    public List<Bid> getBids() {
+    public Set<Bid> getBids() {
         return bids;
     }
 
-    public void setBids(List<Bid> bids) {
+    public void setBids(Set<Bid> bids) {
         this.bids = bids;
     }
 
@@ -153,17 +155,16 @@ public class Project implements Entity {
         this.winner = winner;
     }
 
-    public void addBid(Bid bid) {
-        Boolean isBided = false;
-        for (Bid bidIt : this.bids) {
-            if(bid.getBiddingUser().equals(bidIt.getBiddingUser()))
-                isBided = true;
-        }
-        if(!isBided)
-            this.bids.add(bid);
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void addBid(Bid bid) {
+        if (!bid.getProject().sufficientSkills(bid.getBiddingUser().getSkills()))
+            throw new InsufficientSkill();
+
+        if (bid.getBidAmount() > bid.getProject().getBudget())
+            throw new BudgetOverflow();
+        this.bids.add(bid);
     }
 }

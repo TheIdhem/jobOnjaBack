@@ -4,6 +4,9 @@ public class MissingParameter extends RuntimeException {
 
     private String missingParam;
 
+    public MissingParameter() {
+    }
+
     public MissingParameter(String missingParam) {
         this.missingParam = missingParam;
     }

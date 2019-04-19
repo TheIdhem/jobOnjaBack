@@ -1,12 +1,10 @@
 package Solutions.Core.Dispatcher;
 
 import Solutions.Core.ApplicationProperties;
-import Solutions.Core.Exceptions.IllegalFormat;
-import Solutions.Core.Exceptions.MissingParameter;
-import Solutions.Core.Exceptions.UnAuthorized;
-import Solutions.Data.Exceptions.EntityNotFound;
+import Solutions.Core.Exceptions.NoSuchEndPoint;
 import Solutions.Presentation.Controller.RestController;
 import Solutions.Presentation.Controller.RequestMapping;
+import Solutions.Presentation.ControllerAdvice.RestControllerAdviceManager;
 import org.reflections.Reflections;
 
 import javax.servlet.ServletException;
@@ -28,10 +26,13 @@ import static java.util.stream.Collectors.toSet;
 public class Dispatcher extends HttpServlet {
 
     private Set<EndPoint> endPoints;
+    private final RestControllerAdviceManager restControllerAdviceManager;
 
     public Dispatcher() throws ReflectiveOperationException {
         endPoints = new HashSet<>();
+        restControllerAdviceManager = RestControllerAdviceManager.getInstance();
         addHandlers(ApplicationProperties.getInstance().getProperty("solutions.controller.base_package"));
+
     }
 
 
@@ -41,33 +42,16 @@ public class Dispatcher extends HttpServlet {
         String path = req.getRequestURI();
         Optional<EndPoint> handler = endPoints.stream().sorted(comparing(EndPoint::getPriority))
                 .filter(endPoint -> endPoint.matches(requestMethod, path)).findFirst();
-        String response;
-        if (!handler.isPresent()) {
-            response = "Page not found";
-            resp.setStatus(404);
-        } else {
-
-            try {
-                response = handler.get().invoke(req, resp);
-                resp.setStatus(200);
-            } catch (UnAuthorized e) {
-                response = "Un-authorized: " + e.getMessage();
-                resp.setStatus(403);
-            } catch (EntityNotFound e1) {
-                response = "Unprocessable entity";
-                resp.setStatus(422);
-            } catch (MissingParameter | IllegalFormat e2) {
-                response = e2.getMessage();
-                resp.setStatus(400);
-            }catch (Throwable e3) {
-                response = "An error occurred.";
-                resp.setStatus(500);
-                e3.printStackTrace();
+        try{
+            if (!handler.isPresent()) {
+                throw new NoSuchEndPoint(requestMethod, path);
+            } else {
+                handler.get().invoke(req, resp);
             }
+        } catch (Throwable e) {
+            restControllerAdviceManager.handleException(e, resp);
         }
 
-        resp.setContentType("application/json;charset=UTF-8");
-        resp.getWriter().write(response);
     }
 
 

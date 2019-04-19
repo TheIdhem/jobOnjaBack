@@ -116,7 +116,7 @@ class EndPoint {
         return resolver.resolve(var, context).orElse(null);
     }
 
-    String invoke(HttpServletRequest req, HttpServletResponse resp) throws Throwable {
+    void invoke(HttpServletRequest req, HttpServletResponse resp) throws Throwable {
 
         Map<String, Object> valuations = getValuations(req.getRequestURI());
 
@@ -130,7 +130,7 @@ class EndPoint {
                 PathVariable pathVariable = parameter.getAnnotation(PathVariable.class);
 
                 if (valuations.get(pathVariable.value()) == null)
-                    throw new EntityNotFound();
+                    throw new EntityNotFound(parameter.getType(), pathVariable.value());
 
                 args[i] = valuations.get(pathVariable.value());
 
@@ -145,7 +145,7 @@ class EndPoint {
                 } else {
                     args[i] = convert(req.getParameter(requestParam.value()), parameter.getType());
                     if (args[i] == null)
-                        throw new EntityNotFound();
+                        throw new EntityNotFound(parameter.getType(), requestParam.value());
                 }
             }else if (parameter.isAnnotationPresent(RequestBody.class)) {
 
@@ -155,7 +155,10 @@ class EndPoint {
         }
         try {
             Object result = method.invoke(controllerInstance, args);
-            return objectMapper.writeValueAsString(result);
+            String response = objectMapper.writeValueAsString(result);
+            resp.setStatus(200);
+            resp.setContentType("application/json;charset=UTF-8");
+            resp.getWriter().write(response);
         } catch (InvocationTargetException e) {
             throw e.getTargetException();
         }

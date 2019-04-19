@@ -15,7 +15,7 @@ public class Initializer implements ServletContextListener {
             String[] args = new String[100];
             SolutionsApplication.getInstance().run(args);
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
 
     }

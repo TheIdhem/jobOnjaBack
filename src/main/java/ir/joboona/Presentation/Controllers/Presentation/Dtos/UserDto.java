@@ -26,5 +26,7 @@ public class UserDto {
                 .map(skill -> new SkillDto(skill, visitor)).collect(Collectors.toSet());
     }
 
-
+    public User getTargetUser() {
+        return targetUser;
+    }
 }
