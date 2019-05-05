@@ -1,34 +1,44 @@
 package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
+import Solutions.Data.EntityManager;
 import Solutions.Presentation.Controller.*;
-import ir.joboona.Models.Knowledge;
-import ir.joboona.Models.Skill;
 import ir.joboona.Models.User;
-import ir.joboona.Presentation.Controllers.Presentation.Dtos.UserDto;
+import ir.joboona.Presentation.Dtos.UserDto;
 import ir.joboona.Repositories.UserRepository;
-import ir.joboona.Services.UserService;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import ir.joboona.Repositories.common.Page;
+import ir.joboona.Repositories.common.Pageable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 
 @RestController(basePath = "/user")
 public class UserController {
 
-    private final UserRepository userRepository;
-
-    public UserController() {
-        userRepository = UserRepository.getInstance();
-    }
+    private final UserRepository userRepository = UserRepository.getInstance();
 
     @RequestMapping(method = RequestMethod.GET)
-    public Set<UserDto> show(@RequestParam("userId") User visitor) {
+    public Page<UserDto> show(@RequestParam("userId") User visitor,
+                             @RequestParam("q") String q,
+                             @RequestParam(value = "page", required = true) Integer page,
+                             @RequestParam(value = "size", required = true) Integer size) throws Exception {
 
-        return userRepository.getAll().stream()
-                .map(user -> new UserDto(user, visitor)).collect(Collectors.toSet());
+        Pageable pageable = new Pageable(page, size);
+
+        Page<User> userPage ;
+        if (q == null || q.isEmpty())
+            userPage = userRepository.getAllUsers(pageable);
+        else
+            userPage = userRepository.getAllUsersLike(pageable, q);
+
+        List<UserDto> userDtos = userPage.getResults().stream()
+                .map(item -> new UserDto(item, visitor)).collect(toList());
+
+        return new Page<>(userDtos, pageable, userPage.getCount());
     }
 
     @RequestMapping(path = "/{userId}", method = RequestMethod.GET)

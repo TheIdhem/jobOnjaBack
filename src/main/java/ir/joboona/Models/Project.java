@@ -1,5 +1,9 @@
 package ir.joboona.Models;
 
+import Solutions.Data.Annotations.CollectionTable;
+import Solutions.Data.Annotations.Id;
+
+import Solutions.Data.Annotations.ManyToOne;
 import Solutions.Data.Entity;
 import Solutions.Presentation.Parsers.EntityObjectIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -15,12 +19,9 @@ import static java.lang.Math.round;
 import static java.lang.StrictMath.pow;
 import static java.util.stream.Collectors.toMap;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id", scope = Project.class, resolver = EntityObjectIdResolver.class)
-
-
 public class Project implements Entity {
 
+    @Id
     private String id;
 
     private String title;
@@ -29,27 +30,32 @@ public class Project implements Entity {
 
     private String imageUrl;
 
-    private Set<Skill> skills = new HashSet<>();
+    @CollectionTable(name="ProjectSkill",joinColumn="project")
+    private Set<ProjectSkill> skills;
 
-    private Set<Bid> bids = new HashSet<>();
+    @CollectionTable(name="Bid",joinColumn="project")
+    private Set<Bid> bids;
 
     @JsonProperty(required = true)
     private Integer budget;
 
-    private long deadline;
+    private Long deadline;
 
+    @ManyToOne
     private User winner;
+
+    private Long creationDate;
 
 
     /**
      * Evaluates a set of skills based on project required skills.
      */
-    public Integer evaluateSkillsAndOffers(Set<Skill> actualSkills, Integer offer) {
+    public Integer evaluateSkillsAndOffers(Set<UserSkill> actualSkills, Integer offer) {
 
-        Map<Knowledge, Skill> skillMap = actualSkills.stream().collect(toMap(Skill::getKnowledge, Function.identity()));
+        Map<Knowledge, UserSkill> skillMap = actualSkills.stream().collect(toMap(UserSkill::getKnowledge, Function.identity()));
 
         double result = 0;
-        for (Skill skill : this.skills) {
+        for (ProjectSkill skill : this.getSkills()) {
             Integer required = skill.getPoint();
             Integer actual = skillMap.get(skill.getKnowledge()).getPoint();
             result += 10000 * pow((actual - required), 2);
@@ -58,24 +64,23 @@ public class Project implements Entity {
         return (int) round(result);
     }
 
-    public boolean sufficientSkills(Set<Skill> actualSkills) {
+    public boolean sufficientSkills(Set<UserSkill> actualSkills) {
 
-        if (!actualSkills.containsAll(this.skills))
-            return false;
+        Map<Knowledge, UserSkill> skillMap = actualSkills.stream().collect(toMap(UserSkill::getKnowledge, Function.identity()));
 
-        Map<Knowledge, Skill> skillMap = actualSkills.stream().collect(toMap(Skill::getKnowledge, Function.identity()));
-
-        return this.skills.stream().allMatch(skill ->
+        /*return this.getSkills().stream().allMatch(
+                skill -> skillMap.containsKey(skill.getKnowledge()) &&
                 skillMap.get(skill.getKnowledge()).getPoint() >= skill.getPoint()
-        );
+        );*/
+        for (ProjectSkill projectSkill : this.getSkills())
+            if (!skillMap.containsKey(projectSkill.getKnowledge()) ||
+                    ! (skillMap.get(projectSkill.getKnowledge()).getPoint() >= projectSkill.getPoint()))
+                return false;
+
+        return true;
 
     }
 
-
-    @Override
-    public String getId() {
-        return id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -98,11 +103,11 @@ public class Project implements Entity {
         this.title = title;
     }
 
-    public Set<Skill> getSkills() {
+    public Set<ProjectSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<Skill> skills) {
+    public void setSkills(Set<ProjectSkill> skills) {
         this.skills = skills;
     }
 
@@ -159,12 +164,24 @@ public class Project implements Entity {
         this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(long creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public void addBid(Bid bid) {
         if (!bid.getProject().sufficientSkills(bid.getBiddingUser().getSkills()))
             throw new InsufficientSkill();
 
         if (bid.getBidAmount() > bid.getProject().getBudget())
             throw new BudgetOverflow();
-        this.bids.add(bid);
+        this.getBids().add(bid);
     }
 }

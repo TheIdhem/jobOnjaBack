@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.Presentation.Dtos;
+package ir.joboona.Presentation.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 

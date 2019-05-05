@@ -1,13 +1,11 @@
 package Solutions.Core;
 
 import Solutions.Core.ApplicationRunner.ApplicationRunner;
-import Solutions.Core.Dispatcher.Dispatcher;
-import com.sun.net.httpserver.HttpServer;
+import Solutions.Data.EntityManager;
+import Solutions.Schedule.ScheduleManager;
 import org.reflections.Reflections;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +14,7 @@ import java.util.Set;
 public class SolutionsApplication {
 
     private static SolutionsApplication instance;
+    private ScheduleManager scheduleManager;
 
     public static SolutionsApplication getInstance() {
         if (instance == null)
@@ -26,6 +25,7 @@ public class SolutionsApplication {
     public void run(String[] args) throws Exception {
 
         ApplicationProperties.init();
+        EntityManager.init();
         this.runApplicationRunners();
 
     }
@@ -45,6 +45,13 @@ public class SolutionsApplication {
         AnnotationAwareOrderComparator.sort(instances);
 
         for (ApplicationRunner instance : instances)
-            instance.run();
+            instance.start();
+
+        scheduleManager = ScheduleManager.init();
+    }
+
+
+    public void tearDown(){
+        scheduleManager.tearDown();
     }
 }

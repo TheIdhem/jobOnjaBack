@@ -3,9 +3,12 @@ package Solutions.Presentation.Parsers.PathVariableResolvers;
 import Solutions.Data.Entity;
 import Solutions.Data.EntityManager;
 import Solutions.Presentation.Controller.ControllerParameterResolver;
+import Solutions.Utils.ObjectConverter;
 
 import java.io.Serializable;
 import java.util.Optional;
+
+import static Solutions.Utils.ReflectionUtil.getIdField;
 
 public class EntityControllerParameterResolver implements ControllerParameterResolver<Entity> {
 
@@ -13,21 +16,15 @@ public class EntityControllerParameterResolver implements ControllerParameterRes
 
 
     @Override
-    public Optional<? extends Entity> resolve(String param, Class<? extends Entity> contextType) {
-        Class<? extends Serializable> idType = entityManager.getIdType(contextType);
-        Serializable id;
-        if (idType.equals(String.class))
-            id = param;
-        else if (idType.equals(Integer.class))
-            id = Integer.valueOf(param);
-        else
-            throw new RuntimeException("Unexpected id type:" + idType.getName());
+    public Optional<? extends Entity> resolve(String param, Class<? extends Entity> contextType) throws Exception {
+        Class<?> idType = getIdField(contextType).getType();
+        Serializable id = (Serializable) ObjectConverter.stringToSerializable(param, idType);
         return entityManager.find(contextType, id);
     }
 
     @Override
     public String getRegex(Class<? extends Entity> contextType) {
-        Class<? extends Serializable> idType = entityManager.getIdType(contextType);
+        Class<?> idType = getIdField(contextType).getType();
         if (idType.isAssignableFrom(String.class))
             return "[^/]+";
         else if (idType.isAssignableFrom(Integer.class))

@@ -87,7 +87,7 @@ class EndPoint {
     }
 
     @SuppressWarnings("unchecked")
-    private Map<String, Object> getValuations(String requestUri) {
+    private Map<String, Object> getValuations(String requestUri) throws Exception {
 
         Map<String, Object> valuations = new HashMap<>();
 
@@ -107,7 +107,7 @@ class EndPoint {
     }
 
     @SuppressWarnings("unchecked")
-    private Object convert(String var, Class<?> context) {
+    private Object convert(String var, Class<?> context) throws Exception {
         if (var == null)
             return null;
         ControllerParameterResolver resolver = resolverManager.findClosestPathResolver(context);
@@ -166,6 +166,7 @@ class EndPoint {
 
     int getPriority() {
         return Integer.MAX_VALUE - regex.length();
+
     }
 
     private String getPath() {

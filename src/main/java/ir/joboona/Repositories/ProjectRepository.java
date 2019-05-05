@@ -1,40 +1,66 @@
 package ir.joboona.Repositories;
 
-import Solutions.Data.EntityRepository;
+import Solutions.Data.BeanMapper;
+import Solutions.Data.EntityManager;
 import ir.joboona.Models.Project;
+import ir.joboona.Repositories.common.Page;
+import ir.joboona.Repositories.common.Pageable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProjectRepository implements EntityRepository<Project, String> {
+
+public class ProjectRepository {
 
     private static ProjectRepository instance;
-    private Set<Project> projects;
+    private final EntityManager entityManager = EntityManager.getInstance();
 
-    private ProjectRepository(){
-        projects = new HashSet<>();
-    }
-
-    public static ProjectRepository getInstance(){
+    public static ProjectRepository getInstance() {
         if (instance == null)
             instance = new ProjectRepository();
         return instance;
     }
 
-    @Override
-    public Project save(Project project) {
+    public Page<Project> allProjectsOrderedByCreationDate(Pageable pageable) throws Exception {
 
-        projects.add(project);
-        return project;
+        return entityManager.queryForObject(connection -> {
+            PreparedStatement countStatement = connection.prepareStatement("SELECT COUNT(*) FROM Project");
+            Integer count = countStatement.executeQuery().getInt(1);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Project ORDER BY creationDate DESC LIMIT ?,?");
+            statement.setInt(1, pageable.getBaseOffset());
+            statement.setInt(2,pageable.getSize());
+            ResultSet rs = statement.executeQuery();
+            List<Project> results = new ArrayList<>();
+            BeanMapper beanMapper = new BeanMapper();
+            while (rs.next())
+                results.add(beanMapper.getForObject(rs, "Project", Project.class));
+            return new Page<>(results, pageable, count);
+        });
     }
 
-    public void saveAll(Set<Project> projects) {
-        this.projects.addAll(projects);
+    public Page<Project> allProjectsLikeOrderedByCreationDate(Pageable pageable, String q) throws Exception {
+
+        return entityManager.queryForObject(connection -> {
+            PreparedStatement countStatement = connection.prepareStatement("SELECT COUNT(*) FROM Project WHERE title LIKE ? OR description LIKE ?");
+            countStatement.setString(1, "%" + q + "%");
+            countStatement.setString(2, "%" + q + "%");
+            Integer count = countStatement.executeQuery().getInt(1);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Project WHERE title LIKE ? OR description LIKE ? ORDER BY creationDate DESC LIMIT ?,?");
+            statement.setString(1, "%" + q + "%");
+            statement.setString(2, "%" + q + "%");
+            statement.setInt(3, pageable.getBaseOffset());
+            statement.setInt(4,pageable.getSize());
+            ResultSet rs = statement.executeQuery();
+            List<Project> results = new ArrayList<>();
+            BeanMapper beanMapper = new BeanMapper();
+            while (rs.next())
+                results.add(beanMapper.getForObject(rs, "Project", Project.class));
+            rs.close();
+            return new Page<>(results, pageable, count);
+        });
     }
 
-    @Override
-    public Set<Project> getAll() {
-        return projects;
-    }
 
 }

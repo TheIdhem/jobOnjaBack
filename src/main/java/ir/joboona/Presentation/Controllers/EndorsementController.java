@@ -1,36 +1,31 @@
 package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
-import Solutions.Data.Exceptions.EntityNotFound;
+import Solutions.Data.EntityManager;
 import Solutions.Presentation.Controller.*;
-import ir.joboona.Models.Knowledge;
-import ir.joboona.Models.Skill;
 import ir.joboona.Models.User;
-import ir.joboona.Presentation.Controllers.Presentation.Dtos.SkillDto;
+import ir.joboona.Models.UserSkill;
+import ir.joboona.Presentation.Dtos.UserSkillDto;
 
-@RestController(basePath = "/user/{endorsee}/endorse")
+@RestController(basePath = "/endorse")
 public class EndorsementController {
 
-    @RequestMapping(method = RequestMethod.POST)
-    public SkillDto endorse(@PathVariable("endorsee") User endorsee, @RequestParam("userId") User endorser,
-                            @RequestBody Knowledge knowledge){
+    private EntityManager entityManager = EntityManager.getInstance();
 
-        Skill skill = endorsee.getSkills().stream().filter(eachSkill -> eachSkill.getKnowledge().equals(knowledge))
-                .findFirst().orElseThrow(() -> new EntityNotFound(Skill.class, knowledge.getName()));
+    @RequestMapping(method = RequestMethod.POST)
+    public UserSkillDto endorse(@RequestParam("skillId") UserSkill skill, @RequestParam("userId") User endorser) throws Exception {
 
         skill.addEndorser(endorser);
-        return new SkillDto(skill, endorser);
+        entityManager.save(skill);
+        return new UserSkillDto(skill, endorser);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public SkillDto unEndorse(@PathVariable("endorsee") User endorsee, @RequestParam("userId") User endorser,
-                         @RequestBody Knowledge knowledge){
-
-        Skill skill = endorsee.getSkills().stream().filter(eachSkill -> eachSkill.getKnowledge().equals(knowledge))
-                .findFirst().orElseThrow(() -> new EntityNotFound(Skill.class, knowledge.getName()));
+    public UserSkillDto unEndorse(@RequestParam("skillId") UserSkill skill, @RequestParam("userId") User endorser) throws Exception {
 
         skill.removeEndorser(endorser);
-        return new SkillDto(skill, endorser);
+        entityManager.save(skill);
+        return new UserSkillDto(skill, endorser);
     }
 
 }
