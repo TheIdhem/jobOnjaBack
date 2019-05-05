@@ -7,6 +7,7 @@ import Solutions.Data.Exceptions.EntityNotFound;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdvice;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdviceHandler;
 import ir.joboona.Exceptions.Unauthorized;
+import ir.joboona.Presentation.Dtos.UnauthorizedDto;
 
 @RestControllerAdvice
 public class CommonControllerAdvice {
@@ -23,8 +24,8 @@ public class CommonControllerAdvice {
     }
 
     @RestControllerAdviceHandler(httpStatus = 403)
-    public Unauthorized handleUnauthorized(Unauthorized e){
-        return e;
+    public UnauthorizedDto handleUnauthorized(Unauthorized e){
+        return new UnauthorizedDto(e.getMessage());
     }
 
     @RestControllerAdviceHandler(httpStatus = 400)

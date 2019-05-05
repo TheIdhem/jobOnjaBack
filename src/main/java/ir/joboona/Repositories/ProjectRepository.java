@@ -30,7 +30,7 @@ public class ProjectRepository {
             Integer count = countStatement.executeQuery().getInt(1);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Project ORDER BY creationDate DESC LIMIT ?,?");
             statement.setInt(1, pageable.getBaseOffset());
-            statement.setInt(2,pageable.getSize());
+            statement.setInt(2, pageable.getSize());
             ResultSet rs = statement.executeQuery();
             List<Project> results = new ArrayList<>();
             BeanMapper beanMapper = new BeanMapper();
@@ -47,11 +47,12 @@ public class ProjectRepository {
             countStatement.setString(1, "%" + q + "%");
             countStatement.setString(2, "%" + q + "%");
             Integer count = countStatement.executeQuery().getInt(1);
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Project WHERE title LIKE ? OR description LIKE ? ORDER BY creationDate DESC LIMIT ?,?");
+            PreparedStatement statement = connection
+                    .prepareStatement("SELECT * FROM Project WHERE title LIKE ? OR description LIKE ? ORDER BY creationDate DESC LIMIT ?,?");
             statement.setString(1, "%" + q + "%");
             statement.setString(2, "%" + q + "%");
             statement.setInt(3, pageable.getBaseOffset());
-            statement.setInt(4,pageable.getSize());
+            statement.setInt(4, pageable.getSize());
             ResultSet rs = statement.executeQuery();
             List<Project> results = new ArrayList<>();
             BeanMapper beanMapper = new BeanMapper();

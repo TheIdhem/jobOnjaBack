@@ -28,7 +28,8 @@ public class UserRepository {
             PreparedStatement countStatement = connection.prepareStatement("SELECT COUNT(*) FROM User");
             Integer count = countStatement.executeQuery().getInt(1);
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM User LIMIT ?, ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM User LIMIT ?, ?",
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             statement.setInt(1, pageable.getBaseOffset());
             statement.setInt(2, pageable.getSize());
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +54,8 @@ public class UserRepository {
             Integer count = countStatement.executeQuery().getInt(1);
 
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT * FROM User WHERE firstName LIKE ? OR lastName LIKE ? LIMIT ?,?");
+                    .prepareStatement("SELECT * FROM User WHERE firstName LIKE ? OR lastName LIKE ? LIMIT ?,?",
+                            ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1, "%" + q + "%");
             statement.setString(2, "%" + q + "%");
             statement.setInt(3, pageable.getBaseOffset());

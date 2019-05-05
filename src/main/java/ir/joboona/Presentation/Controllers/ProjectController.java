@@ -6,6 +6,7 @@ import Solutions.Presentation.Controller.RestController;
 import Solutions.Presentation.Controller.PathVariable;
 import Solutions.Presentation.Controller.RequestMapping;
 import Solutions.Presentation.Controller.RequestParam;
+import ir.joboona.Exceptions.Unauthorized;
 import ir.joboona.Models.Bid;
 import ir.joboona.Models.Project;
 import ir.joboona.Models.User;
@@ -39,7 +40,7 @@ public class ProjectController {
             projectPage = projectRepository.allProjectsLikeOrderedByCreationDate(pageable, q);
 
         List<ProjectDto> results = projectPage.getResults().stream()
-                //.filter(project -> project.sufficientSkills(user.getSkills()))
+                .filter(project -> project.sufficientSkills(user.getSkills()))
                 .map(p -> new ProjectDto(isUserBidding(p, user), p)).collect(toList());
 
         return new Page<>(results, projectPage.getPageable(), projectPage.getCount());
@@ -50,9 +51,9 @@ public class ProjectController {
     public ProjectDto get(@PathVariable(value = "projectId") Project project,
                           @RequestParam(value = "userId", required = true) User user) {
 
-        /*if (!project.sufficientSkills(user.getSkills()))
+        if (!project.sufficientSkills(user.getSkills()))
             throw new Unauthorized("شما مهارتهای لازم برای مشاهده این پروژه را ندارید.");
-        */
+
         return new ProjectDto(isUserBidding(project, user), project);
     }
 

@@ -68,17 +68,10 @@ public class Project implements Entity {
 
         Map<Knowledge, UserSkill> skillMap = actualSkills.stream().collect(toMap(UserSkill::getKnowledge, Function.identity()));
 
-        /*return this.getSkills().stream().allMatch(
+        return this.getSkills().stream().allMatch(
                 skill -> skillMap.containsKey(skill.getKnowledge()) &&
                 skillMap.get(skill.getKnowledge()).getPoint() >= skill.getPoint()
-        );*/
-        for (ProjectSkill projectSkill : this.getSkills())
-            if (!skillMap.containsKey(projectSkill.getKnowledge()) ||
-                    ! (skillMap.get(projectSkill.getKnowledge()).getPoint() >= projectSkill.getPoint()))
-                return false;
-
-        return true;
-
+        );
     }
 
 
