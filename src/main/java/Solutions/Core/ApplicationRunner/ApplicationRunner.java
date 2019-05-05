@@ -7,5 +7,5 @@ import org.springframework.core.Ordered;
  */
 public interface ApplicationRunner extends Ordered {
 
-    void run() throws Exception;
+    void start() throws Exception;
 }

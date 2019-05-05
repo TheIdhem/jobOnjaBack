@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.Presentation.Dtos;
+package ir.joboona.Presentation.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import ir.joboona.Models.User;
@@ -21,9 +21,9 @@ public class UserDto {
         this.visitor = visitor;
     }
 
-    public Set<SkillDto> getSkills(){
+    public Set<UserSkillDto> getSkills(){
         return targetUser.getSkills().stream()
-                .map(skill -> new SkillDto(skill, visitor)).collect(Collectors.toSet());
+                .map(skill -> new UserSkillDto(skill, visitor)).collect(Collectors.toSet());
     }
 
     public User getTargetUser() {

@@ -5,20 +5,25 @@ import org.springframework.core.GenericTypeResolver;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
-public interface EntityRepository<T extends Entity, ID_TYPE extends Serializable> extends ModelRepository<T> {
-
-    default Optional<T> getById(Serializable id) {
-        return getAll().stream().filter(item -> item.getId().equals(id)).findFirst();
-    }
+public abstract class EntityRepository<T extends Entity, ID_TYPE extends Serializable> {
 
     @SuppressWarnings("unchecked")
-    default Class<ID_TYPE> getIdType() {
+    public Class<ID_TYPE> getIdType() {
 
         return (Class<ID_TYPE>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(
                 getClass(),
                 EntityRepository.class
         ))[1];
+    }
+
+    public T save(T item){
+        return null;
+    }
+
+    public Set<T> getAll(){
+       return null;
     }
 
 }

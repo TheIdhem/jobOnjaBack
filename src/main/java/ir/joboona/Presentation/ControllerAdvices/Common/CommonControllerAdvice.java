@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.ControllerAdvices.Common;
+package ir.joboona.Presentation.ControllerAdvices.Common;
 
 import Solutions.Core.Exceptions.IllegalFormat;
 import Solutions.Core.Exceptions.MissingParameter;
@@ -6,7 +6,7 @@ import Solutions.Core.Exceptions.NoSuchEndPoint;
 import Solutions.Data.Exceptions.EntityNotFound;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdvice;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdviceHandler;
-import ir.joboona.Exceptions.BidExceptions.Common.Unauthorized;
+import ir.joboona.Exceptions.Unauthorized;
 
 @RestControllerAdvice
 public class CommonControllerAdvice {

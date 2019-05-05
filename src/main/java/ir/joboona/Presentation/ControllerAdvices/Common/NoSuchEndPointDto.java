@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.ControllerAdvices.Common;
+package ir.joboona.Presentation.ControllerAdvices.Common;
 
 import Solutions.Core.Exceptions.NoSuchEndPoint;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;

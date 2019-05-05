@@ -1,24 +1,23 @@
 package ir.joboona.Models;
 
-import Solutions.Data.Entity;
-import Solutions.Presentation.Parsers.EntityObjectIdResolver;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import Solutions.Data.*;
+import Solutions.Data.Annotations.Id;
+import Solutions.Data.Annotations.JoinColumn;
+import Solutions.Data.Annotations.OneToMany;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id", scope = User.class, resolver = EntityObjectIdResolver.class)
+public class User implements Entity{
 
-public class User implements Entity {
-
+    @Id
     private String id;
 
-    private Set<Skill> skills;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.DELETE})
+    @JoinColumn(name="user", referencedColumnName="id")
+    private Set<UserSkill> skills;
 
     private String firstName;
 
@@ -31,13 +30,13 @@ public class User implements Entity {
     private String bio;
 
     public User() {
-        this.skills = new HashSet<>();
     }
 
-    public User(String id, String firstName, String lastName, Set<Skill> skills, String jobTitle, String bio,String profilePictureURL) {
+    public User(String id, String firstName, String lastName, Set<UserSkill> skills, String jobTitle, String bio,String profilePictureURL) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        skills.forEach(skill -> skill.setUser(this));
         this.skills = skills;
         this.jobTitle = jobTitle;
         this.bio = bio;
@@ -47,7 +46,7 @@ public class User implements Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
         User user = (User) o;
         return Objects.equals(id, user.id);
     }
@@ -58,11 +57,11 @@ public class User implements Entity {
     }
 
 
-    public Set<Skill> getSkills() {
+    public Set<UserSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<Skill> skills) {
+    public void setSkills(Set<UserSkill> skills) {
         this.skills = skills;
     }
 
@@ -106,20 +105,20 @@ public class User implements Entity {
         this.bio = bio;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
 
-    public void deleteSkill(Skill skill) {
-        this.skills.remove(skill);
+    public String getId() {
+        return id;
     }
 
-    public void addSkill(Skill skill) {
-        this.skills.add(skill);
+    public void deleteSkill(UserSkill skill) {
+        this.getSkills().remove(skill);
+    }
+
+    public void addSkill(UserSkill skill) {
+        skill.setUser(this);
+        this.getSkills().add(skill);
     }
 }

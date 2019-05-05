@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.ControllerAdvices;
+package ir.joboona.Presentation.ControllerAdvices;
 
 import Solutions.Presentation.ControllerAdvice.RestControllerAdvice;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdviceHandler;

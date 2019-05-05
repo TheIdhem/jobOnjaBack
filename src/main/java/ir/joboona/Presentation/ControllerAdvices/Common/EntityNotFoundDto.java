@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers.ControllerAdvices.Common;
+package ir.joboona.Presentation.ControllerAdvices.Common;
 
 import Solutions.Data.Exceptions.EntityNotFound;
 

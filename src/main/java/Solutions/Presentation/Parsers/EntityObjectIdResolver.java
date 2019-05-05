@@ -39,7 +39,12 @@ public class EntityObjectIdResolver extends SimpleObjectIdResolver {
         Serializable id = (Serializable) idKey.key;
         Class<? extends Entity> entityType = (Class<? extends Entity>) idKey.scope;
 
-        return entityManager.find(entityType, id).orElseThrow(() -> new EntityNotFound(entityType, id));
+        try {
+            return entityManager.find(entityType, id).orElseThrow(() -> new EntityNotFound(entityType, id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
