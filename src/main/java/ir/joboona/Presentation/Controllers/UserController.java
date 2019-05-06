@@ -29,11 +29,7 @@ public class UserController {
 
         Pageable pageable = new Pageable(page, size);
 
-        Page<User> userPage ;
-        if (q == null || q.isEmpty())
-            userPage = userRepository.getAllUsers(pageable);
-        else
-            userPage = userRepository.getAllUsersLike(pageable, q);
+        Page<User> userPage = userRepository.getAllUsersLike(pageable, q);
 
         List<UserDto> userDtos = userPage.getResults().stream()
                 .map(item -> new UserDto(item, visitor)).collect(toList());

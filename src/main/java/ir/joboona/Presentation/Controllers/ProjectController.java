@@ -15,7 +15,6 @@ import ir.joboona.Repositories.common.Page;
 import ir.joboona.Presentation.Dtos.ProjectDto;
 import ir.joboona.Repositories.common.Pageable;
 
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -33,14 +32,9 @@ public class ProjectController {
                                  @RequestParam(value = "size", required = true) Integer size) throws Exception {
 
         Pageable pageable = new Pageable(page, size);
-        Page<Project> projectPage;
-        if (q == null || q.isEmpty())
-            projectPage = projectRepository.allProjectsOrderedByCreationDate(pageable);
-        else
-            projectPage = projectRepository.allProjectsLikeOrderedByCreationDate(pageable, q);
+        Page<Project> projectPage = projectRepository.allQualifingProjectsLikeOrderedByCreationDate(pageable, q, user);
 
         List<ProjectDto> results = projectPage.getResults().stream()
-                .filter(project -> project.sufficientSkills(user.getSkills()))
                 .map(p -> new ProjectDto(isUserBidding(p, user), p)).collect(toList());
 
         return new Page<>(results, projectPage.getPageable(), projectPage.getCount());
