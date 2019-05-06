@@ -5,6 +5,7 @@ import Solutions.Data.Annotations.Id;
 import Solutions.Data.Annotations.JoinColumn;
 import Solutions.Data.Annotations.OneToMany;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -119,6 +120,7 @@ public class User implements Entity{
 
     public void addSkill(UserSkill skill) {
         skill.setUser(this);
+        skill.setEndorsements(new HashSet<>());
         this.getSkills().add(skill);
     }
 }
