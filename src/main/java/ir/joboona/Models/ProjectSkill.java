@@ -44,7 +44,7 @@ public class ProjectSkill {
         if (this == o) return true;
         if (!(o instanceof ProjectSkill)) return false;
         ProjectSkill skill = (ProjectSkill) o;
-        return Objects.equals(knowledge, skill.knowledge);
+        return Objects.equals(getKnowledge(), skill.getKnowledge());
     }
 
     @Override

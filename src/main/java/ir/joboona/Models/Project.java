@@ -5,10 +5,7 @@ import Solutions.Data.Annotations.Id;
 
 import Solutions.Data.Annotations.ManyToOne;
 import Solutions.Data.Entity;
-import Solutions.Presentation.Parsers.EntityObjectIdResolver;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ir.joboona.Exceptions.BidExceptions.BudgetOverflow;
 import ir.joboona.Exceptions.BidExceptions.InsufficientSkill;
 
@@ -78,7 +75,7 @@ public class Project implements Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Project)) return false;
         Project project = (Project) o;
         return Objects.equals(title, project.title);
     }
