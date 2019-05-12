@@ -5,6 +5,7 @@ import Solutions.Data.EntityManager;
 import ir.joboona.Models.Knowledge;
 import ir.joboona.Models.User;
 import ir.joboona.Models.UserSkill;
+import ir.joboona.Services.UserService;
 import org.springframework.core.Ordered;
 
 import static java.util.stream.Collectors.toSet;
@@ -13,6 +14,7 @@ import static java.util.stream.Stream.of;
 public class DefaultUserSeed implements ApplicationRunner {
 
     private final EntityManager entityManager = EntityManager.getInstance();
+    private final UserService userService = UserService.getInstance();
 
     @Override
     public void start() throws Exception {
@@ -22,7 +24,8 @@ public class DefaultUserSeed implements ApplicationRunner {
         Knowledge cpp = entityManager.find(Knowledge.class,"C++").get();
         Knowledge java = entityManager.find(Knowledge.class,"Java").get();
         User user = new User(
-                "1",
+                "alish",
+                "alish",
                 "علی",
                 "شریف زاده",
                 of(new UserSkill(1, html, 5), new UserSkill(2, js, 4),
@@ -33,7 +36,8 @@ public class DefaultUserSeed implements ApplicationRunner {
         );
 
         User user1 = new User(
-                "2",
+                "mryf",
+                "mryf",
                 "محمد رضا",
                 "یزدانیفر",
                 of(new UserSkill(5, html, 5), new UserSkill(6, js, 4),
@@ -44,7 +48,8 @@ public class DefaultUserSeed implements ApplicationRunner {
         );
 
         User user2 = new User(
-                "3",
+                "golnar",
+                "golnar",
                 "گلناز",
                 "ادیب",
                 of(new UserSkill(9, html, 5), new UserSkill(10, js, 4),
@@ -54,9 +59,10 @@ public class DefaultUserSeed implements ApplicationRunner {
                 "https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Ftimedotcom.files.wordpress.com%2F2015%2F04%2Fayatollah-khamenei.jpg&w=800&c=sc&poi=face&q=85"
         );
 
-        entityManager.save(user1);
-        entityManager.save(user2);
-        entityManager.save(user);
+
+        userService.registerUser(user);
+        userService.registerUser(user1);
+        userService.registerUser(user2);
 
     }
 

@@ -4,6 +4,7 @@ import Solutions.Data.*;
 import Solutions.Data.Annotations.Id;
 import Solutions.Data.Annotations.JoinColumn;
 import Solutions.Data.Annotations.OneToMany;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +15,13 @@ import java.util.Set;
 public class User implements Entity{
 
     @Id
-    private String id;
+    @AutoIncrement
+    private Integer id;
+
+    private String username;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.DELETE})
     @JoinColumn(name="user", referencedColumnName="id")
@@ -33,8 +40,10 @@ public class User implements Entity{
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, Set<UserSkill> skills, String jobTitle, String bio,String profilePictureURL) {
+    public User(String username, String password, String firstName, String lastName, Set<UserSkill> skills, String jobTitle, String bio, String profilePictureURL) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         skills.forEach(skill -> skill.setUser(this));
@@ -106,12 +115,28 @@ public class User implements Entity{
         this.bio = bio;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void deleteSkill(UserSkill skill) {

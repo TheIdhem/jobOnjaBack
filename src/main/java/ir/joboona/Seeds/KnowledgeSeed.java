@@ -4,7 +4,7 @@ import Solutions.Core.ApplicationRunner.ApplicationRunner;
 import Solutions.Data.EntityManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import ir.joboona.HttpClient.HttpGetClient;
+import ir.joboona.Utils.HttpClient.HttpGetClient;
 import ir.joboona.Models.Knowledge;
 
 import java.util.Set;

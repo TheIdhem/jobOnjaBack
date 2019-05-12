@@ -1,4 +1,4 @@
-package ir.joboona.Presentation.Controllers;
+package ir.joboona.configurations;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

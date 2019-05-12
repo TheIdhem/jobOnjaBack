@@ -14,6 +14,7 @@ import java.util.*;
 import static Solutions.Data.Proxy.Manipulation.ModelProxyFieldAccessors.getColumns;
 import static Solutions.Utils.ReflectionUtil.getFieldValue;
 import static Solutions.Utils.ReflectionUtil.getIdField;
+import static Solutions.Utils.ReflectionUtil.setField;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Collections.singleton;
@@ -83,12 +84,23 @@ public class EntityManager {
         String sql = persist(o, tableName, new ArrayList<>(), values);
 
         return this.queryForObject(connection ->  {
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement;
+            if (getIdField(o.getClass()).isAnnotationPresent(AutoIncrement.class))
+                statement = connection.prepareStatement(sql);
+            else
+                statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             for (int i = 1; i <= values.size(); i++)
                 statement.setObject(i, values.get(i - 1));
 
             int rowsAffected = statement.executeUpdate();
             assert rowsAffected == 1;
+
+            if (getIdField(o.getClass()).isAnnotationPresent(AutoIncrement.class))
+                try(ResultSet r = statement.getGeneratedKeys()) {
+                    r.next();
+                    setField(getIdField(o.getClass()), o, r.getInt(1));
+                }
+
             for (Field f : getAllFields(o.getClass())) {
                 if (f.getName().startsWith("__"))
                     continue;

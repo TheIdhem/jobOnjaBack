@@ -1,4 +1,4 @@
-package ir.joboona.HttpClient;
+package ir.joboona.Utils.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

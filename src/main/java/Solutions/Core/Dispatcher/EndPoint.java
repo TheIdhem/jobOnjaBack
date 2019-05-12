@@ -148,9 +148,16 @@ class EndPoint {
                         throw new EntityNotFound(parameter.getType(), requestParam.value());
                 }
             }else if (parameter.isAnnotationPresent(RequestBody.class)) {
-
                 args[i] = objectMapper.readValue(req.getReader(), parameter.getType());
-            } else
+            } else if(parameter.getType() == HttpServletResponse.class) {
+                args[i] = resp;
+            } else if (parameter.getType() == HttpServletRequest.class) {
+                args[i] = req;
+            } else if (parameter.isAnnotationPresent(RequestAttribute.class)){
+                String name = parameter.getAnnotation(RequestAttribute.class).value();
+                args[i] = req.getAttribute(name);
+            }
+            else
                 throw new RuntimeException("Unexpected parameter for method.");
         }
         try {

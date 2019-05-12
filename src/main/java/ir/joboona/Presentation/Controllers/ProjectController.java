@@ -2,11 +2,8 @@ package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
 import Solutions.Data.EntityManager;
-import Solutions.Presentation.Controller.RestController;
-import Solutions.Presentation.Controller.PathVariable;
-import Solutions.Presentation.Controller.RequestMapping;
-import Solutions.Presentation.Controller.RequestParam;
-import ir.joboona.Exceptions.Unauthorized;
+import Solutions.Presentation.Controller.*;
+import ir.joboona.Exceptions.Forbidden;
 import ir.joboona.Models.Bid;
 import ir.joboona.Models.Project;
 import ir.joboona.Models.User;
@@ -26,7 +23,7 @@ public class ProjectController {
     private final ProjectRepository projectRepository = ProjectRepository.getInstance();
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<ProjectDto> show(@RequestParam(value = "userId", required = true) User user,
+    public Page<ProjectDto> show(@RequestAttribute("principal") User user,
                                  @RequestParam("q") String q,
                                  @RequestParam(value = "page", required = true) Integer page,
                                  @RequestParam(value = "size", required = true) Integer size) throws Exception {
@@ -42,17 +39,16 @@ public class ProjectController {
 
 
     @RequestMapping(path = "/{projectId}", method = RequestMethod.GET)
-    public ProjectDto get(@PathVariable(value = "projectId") Project project,
-                          @RequestParam(value = "userId", required = true) User user) {
+    public ProjectDto get(@PathVariable(value = "projectId") Project project, @RequestAttribute("principal") User user) {
 
         if (!project.sufficientSkills(user.getSkills()))
-            throw new Unauthorized("شما مهارتهای لازم برای مشاهده این پروژه را ندارید.");
+            throw new Forbidden("شما مهارتهای لازم برای مشاهده این پروژه را ندارید.");
 
         return new ProjectDto(isUserBidding(project, user), project);
     }
 
     @RequestMapping(path = "/{projectId}/bid",method = RequestMethod.POST)
-    public Bid bid(@PathVariable("projectId") Project project, @RequestParam("userId") User user,
+    public Bid bid(@PathVariable("projectId") Project project, @RequestAttribute("principal") User user,
                    @RequestParam(value = "amount", required = true) Integer amount) throws Exception {
 
         Bid bid = new Bid(user, project, amount);

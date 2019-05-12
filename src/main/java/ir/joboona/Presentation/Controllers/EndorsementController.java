@@ -13,7 +13,7 @@ public class EndorsementController {
     private EntityManager entityManager = EntityManager.getInstance();
 
     @RequestMapping(method = RequestMethod.POST)
-    public UserSkillDto endorse(@RequestParam("skillId") UserSkill skill, @RequestParam("userId") User endorser) throws Exception {
+    public UserSkillDto endorse(@RequestParam("skillId") UserSkill skill, @RequestAttribute("principal") User endorser) throws Exception {
 
         skill.addEndorser(endorser);
         entityManager.save(skill);
@@ -21,7 +21,7 @@ public class EndorsementController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public UserSkillDto unEndorse(@RequestParam("skillId") UserSkill skill, @RequestParam("userId") User endorser) throws Exception {
+    public UserSkillDto unEndorse(@RequestParam("skillId") UserSkill skill, @RequestAttribute("principal") User endorser) throws Exception {
 
         skill.removeEndorser(endorser);
         entityManager.save(skill);

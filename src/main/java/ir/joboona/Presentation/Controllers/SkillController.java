@@ -24,7 +24,7 @@ public class SkillController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User addSkill(@RequestBody UserSkill skill,
-                         @RequestParam(value = "userId", required = true) User user) throws Exception {
+                         @RequestAttribute("principal") User user) throws Exception {
         skill.setId(Objects.hash(user, skill.hashCode()));
         user.addSkill(skill);
         entityManager.save(user);
@@ -33,7 +33,7 @@ public class SkillController {
 
     @RequestMapping(path = "/{skillId}",method = RequestMethod.DELETE)
     public User removeSkill(@PathVariable("skillId") UserSkill skill,
-                            @RequestParam(value = "userId", required = true) User user) throws Exception {
+                            @RequestAttribute("principal") User user) throws Exception {
 
         user.deleteSkill(skill);
         entityManager.save(user);
@@ -41,7 +41,7 @@ public class SkillController {
     }
 
     @RequestMapping(path = "/retard",method = RequestMethod.GET)
-    public Set<Knowledge> getRetardKnowledge(@RequestParam(value = "userId", required = true) User user) throws Exception {
+    public Set<Knowledge> getRetardKnowledge(@RequestAttribute("principal") User user) throws Exception {
         return userService.retardKnowledge(user);
     }
 }

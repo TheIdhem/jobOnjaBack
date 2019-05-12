@@ -118,10 +118,11 @@ public class GetterInterceptor {
         if (getFieldValue(field, proxy) == null){
             if(field.isAnnotationPresent(ManyToOne.class)) {
                 String columnValue = ModelProxyFieldAccessors.getColumns(proxy).get(pd.getName());
-
-                Serializable idValue = stringToSerializable(columnValue, (Class<Serializable>) getIdField(field.getType()).getType());
-                Object o = entityManager.find((Class<? extends Entity>) field.getType(), idValue).orElse(null);
-                setField(field, proxy, o);
+                if (columnValue != null) {
+                    Serializable idValue = stringToSerializable(columnValue, (Class<Serializable>) getIdField(field.getType()).getType());
+                    Object o = entityManager.find((Class<? extends Entity>) field.getType(), idValue).orElse(null);
+                    setField(field, proxy, o);
+                }
             }
         }
         return getFieldValue(field, proxy);

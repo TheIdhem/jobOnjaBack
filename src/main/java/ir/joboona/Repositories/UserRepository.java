@@ -9,6 +9,7 @@ import ir.joboona.Repositories.common.Pageable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class UserRepository {
@@ -49,6 +50,20 @@ public class UserRepository {
 
             return new Page<>(users, pageable, count);
 
+        });
+    }
+
+    public Optional<User> findUserByUsername(String username) throws Exception {
+        return entityManager.queryForObject(connection -> {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM User WHERE username = ?");
+            ps.setString(1, username);
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    User user = new BeanMapper().getForObject(rs, "User", User.class);
+                    return Optional.of(user);
+                }
+                return Optional.empty();
+            }
         });
     }
 }

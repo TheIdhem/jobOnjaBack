@@ -36,7 +36,7 @@ public class Dispatcher extends HttpServlet {
     }
 
 
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) {
 
         RequestMethod requestMethod = RequestMethod.valueOf(req.getMethod());
         String path = req.getRequestURI();

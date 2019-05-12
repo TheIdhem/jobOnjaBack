@@ -5,9 +5,7 @@ import Solutions.Data.Annotations.OneToMany;
 import Solutions.Data.CascadeType;
 import Solutions.Data.EntityManager;
 
-import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;

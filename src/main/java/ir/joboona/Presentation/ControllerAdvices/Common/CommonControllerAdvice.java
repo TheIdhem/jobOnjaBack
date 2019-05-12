@@ -6,7 +6,9 @@ import Solutions.Core.Exceptions.NoSuchEndPoint;
 import Solutions.Data.Exceptions.EntityNotFound;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdvice;
 import Solutions.Presentation.ControllerAdvice.RestControllerAdviceHandler;
-import ir.joboona.Exceptions.Unauthorized;
+import ir.joboona.Exceptions.DuplicateItemException;
+import ir.joboona.Exceptions.Forbidden;
+import ir.joboona.Presentation.Dtos.DuplicateItemMessage;
 import ir.joboona.Presentation.Dtos.UnauthorizedDto;
 
 @RestControllerAdvice
@@ -24,7 +26,7 @@ public class CommonControllerAdvice {
     }
 
     @RestControllerAdviceHandler(httpStatus = 403)
-    public UnauthorizedDto handleUnauthorized(Unauthorized e){
+    public UnauthorizedDto handleUnauthorized(Forbidden e){
         return new UnauthorizedDto(e.getMessage());
     }
 
@@ -37,6 +39,14 @@ public class CommonControllerAdvice {
     public IllegalFormat handleMissingParameter(IllegalFormat e){
         return e;
     }
+
+
+    @RestControllerAdviceHandler(httpStatus = 400)
+    public DuplicateItemMessage handleDuplicateItem(DuplicateItemException e){
+        return new DuplicateItemMessage(" نمیتوانند تکراری باشند." +
+                e.getType().getSimpleName() + "در آیتم " + e.getFields() + "عنصر(ها) ");
+    }
+
 
     @RestControllerAdviceHandler(httpStatus = 500)
     public Throwable handleAll(Throwable e){

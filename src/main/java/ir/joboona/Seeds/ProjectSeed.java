@@ -6,7 +6,7 @@ import Solutions.Schedule.Schedulable;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import ir.joboona.HttpClient.HttpGetClient;
+import ir.joboona.Utils.HttpClient.HttpGetClient;
 import ir.joboona.Models.Project;
 
 import java.util.Set;
