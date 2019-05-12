@@ -40,6 +40,7 @@ public class AuthenticationService {
                 .signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS256)
                 .setHeaderParam("typ", TOKEN_TYPE)
                 .setIssuer(TOKEN_ISSUER)
+                .setIssuedAt(new Date())
                 .setSubject(user.getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + 864000000))
                 .compact();
