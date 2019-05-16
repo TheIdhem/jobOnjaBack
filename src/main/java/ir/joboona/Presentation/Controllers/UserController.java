@@ -52,10 +52,12 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User create (@RequestBody User user) throws Exception {
+    public User create (@RequestBody User user,HttpServletResponse resp) throws Exception {
         if(userRepository.findUserByUsername(user.getUsername()).isPresent())
             throw new DuplicateItemException(User.class, singleton("username"));
         userService.registerUser(user);
+        String token = authenticationService.generateJWT_Token(user);
+        resp.addHeader("Authorization", token);
         return user;
     }
 
