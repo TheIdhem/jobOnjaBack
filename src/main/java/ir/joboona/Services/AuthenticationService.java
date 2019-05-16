@@ -14,10 +14,10 @@ import java.util.Optional;
 
 public class AuthenticationService {
 
-    private final String TOKEN_TYPE = "JWT";
-    private final String TOKEN_ISSUER = "joboonja.com";
-    private final String TOKEN_PREFIX = "Bearer ";
-    private final String JWT_SECRET = "n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf";
+    private static final String TOKEN_TYPE = "JWT";
+    private static final String TOKEN_ISSUER = "joboonja.com";
+    private static final String TOKEN_PREFIX = "Bearer ";
+    private static final String JWT_SECRET = "n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf";
 
     private static AuthenticationService instance;
 

@@ -10,7 +10,9 @@ import ir.joboona.Repositories.common.Pageable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ProjectRepository {
@@ -58,6 +60,22 @@ public class ProjectRepository {
                 results.add(beanMapper.getForObject(rs, "Project", Project.class));
             rs.close();
             return new Page<>(results, pageable, count);
+        });
+    }
+
+
+    public Set<Project> getAllProjectsWithDeadlineBeforeAndNotAuctioned(Long deadline) throws Exception {
+        String sql = "SELECT * FROM Project WHERE deadline <= ? AND winner IS NULL";
+        return entityManager.queryForObject(connection -> {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, deadline);
+            BeanMapper beanMapper = new BeanMapper();
+            Set<Project> result = new HashSet<>();
+            try(ResultSet rs = statement.executeQuery()){
+                while (rs.next())
+                    result.add(beanMapper.getForObject(rs, "Project", Project.class));
+            }
+            return result;
         });
     }
 

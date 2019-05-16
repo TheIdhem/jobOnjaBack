@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import static java.lang.Math.round;
 import static java.lang.StrictMath.pow;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toMap;
 
 public class Project implements Entity {
@@ -47,7 +48,7 @@ public class Project implements Entity {
     /**
      * Evaluates a set of skills based on project required skills.
      */
-    public Integer evaluateSkillsAndOffers(Set<UserSkill> actualSkills, Integer offer) {
+    private Integer evaluateSkillsAndOffers(Set<UserSkill> actualSkills, Integer offer) {
 
         Map<Knowledge, UserSkill> skillMap = actualSkills.stream().collect(toMap(UserSkill::getKnowledge, Function.identity()));
 
@@ -173,5 +174,13 @@ public class Project implements Entity {
         if (bid.getBidAmount() > bid.getProject().getBudget())
             throw new BudgetOverflow();
         this.getBids().add(bid);
+    }
+
+    public void performAuction() {
+        Optional<Bid> winningBid =  getBids().stream().max(comparing(bid ->
+                this.evaluateSkillsAndOffers(bid.getBiddingUser().getSkills(), bid.getBidAmount())
+        ));
+        if (winningBid.isPresent() && this.getWinner() == null)
+            this.winner = winningBid.get().getBiddingUser();
     }
 }

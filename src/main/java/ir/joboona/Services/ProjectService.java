@@ -25,11 +25,4 @@ public class ProjectService {
         return entityManager.save(project);
     }
 
-    public Bid performAuction(Project project) {
-
-        return project.getBids().stream().max(comparing(bid ->
-                project.evaluateSkillsAndOffers(bid.getBiddingUser().getSkills(), bid.getBidAmount())
-        )).orElseThrow(() -> new EntityNotFound(Project.class, project.getId()));
-    }
-
 }
