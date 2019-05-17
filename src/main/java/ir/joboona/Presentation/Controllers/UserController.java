@@ -1,7 +1,6 @@
 package ir.joboona.Presentation.Controllers;
 
 import Solutions.Core.Dispatcher.RequestMethod;
-import Solutions.Data.EntityManager;
 import Solutions.Presentation.Controller.*;
 import ir.joboona.Exceptions.DuplicateItemException;
 import ir.joboona.Exceptions.Forbidden;
@@ -55,8 +54,7 @@ public class UserController {
     public User create (@RequestBody User user) throws Exception {
         if(userRepository.findUserByUsername(user.getUsername()).isPresent())
             throw new DuplicateItemException(User.class, singleton("username"));
-        userService.registerUser(user);
-        return user;
+        return userService.registerUser(user);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/login")

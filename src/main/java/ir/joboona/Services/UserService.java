@@ -23,10 +23,6 @@ public class UserService {
         return instance;
     }
 
-    public User create(User user) throws Exception {
-        return entityManager.save(user);
-    }
-
     public User registerUser(User user) throws Exception {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
         entityManager.save(user);

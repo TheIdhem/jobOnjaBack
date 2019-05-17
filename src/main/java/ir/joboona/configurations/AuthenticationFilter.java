@@ -1,5 +1,6 @@
 package ir.joboona.configurations;
 
+import io.jsonwebtoken.MalformedJwtException;
 import ir.joboona.Models.User;
 import ir.joboona.Services.AuthenticationService;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-@WebFilter("/*")
+@WebFilter(filterName="AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -36,19 +37,26 @@ public class AuthenticationFilter implements Filter {
             Optional<User> user = Optional.empty();
             try {
                 user = AuthenticationService.getInstance().getPrincipal(token);
-            } catch (Exception e) {
+            }catch (MalformedJwtException e1){
+                invalidToken(res);
+                return;
+            }catch (Exception e) {
                 e.printStackTrace();
             }
 
             if (!user.isPresent()){
-                res.setStatus(403);
-                res.setContentType("application/json;charset=UTF-8");
-                res.getWriter().write("{\"message\":\"توکن احراز هویت نامعتبر است.\"}");
+                invalidToken(res);
             }else {
                 req.setAttribute("principal", user.get());
                 chain.doFilter(request, response);
             }
 
         }
+    }
+
+    private void invalidToken(HttpServletResponse res) throws IOException {
+        res.setStatus(403);
+        res.setContentType("application/json;charset=UTF-8");
+        res.getWriter().write("{\"message\":\"توکن احراز هویت نامعتبر است\"}");
     }
 }
