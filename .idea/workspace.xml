@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fba9cac9-0749-408c-8ead-04f9c3b92e90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ir/joboona/Presentation/Controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/joboona/Presentation/Controllers/UserController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -185,7 +184,7 @@
           <entry key="js" value="126" />
           <entry key="properties" value="50" />
           <entry key="sql" value="2374" />
-          <entry key="txt" value="586" />
+          <entry key="txt" value="619" />
           <entry key="xml" value="32" />
         </counts>
       </usages-collector>
@@ -193,7 +192,7 @@
         <counts>
           <entry key="JAVA" value="31522" />
           <entry key="JavaScript" value="126" />
-          <entry key="PLAIN_TEXT" value="594" />
+          <entry key="PLAIN_TEXT" value="627" />
           <entry key="Properties" value="50" />
           <entry key="SQL" value="263" />
           <entry key="Scratch" value="2122" />
@@ -206,7 +205,7 @@
           <entry key="class" value="9" />
           <entry key="endorsement" value="8" />
           <entry key="gitignore" value="1" />
-          <entry key="java" value="701" />
+          <entry key="java" value="702" />
           <entry key="js" value="7" />
           <entry key="jsp" value="2" />
           <entry key="knowledge" value="5" />
@@ -224,7 +223,7 @@
         <counts>
           <entry key="CLASS" value="9" />
           <entry key="Database Element" value="84" />
-          <entry key="JAVA" value="701" />
+          <entry key="JAVA" value="702" />
           <entry key="JSP" value="2" />
           <entry key="JavaScript" value="7" />
           <entry key="PLAIN_TEXT" value="1" />
@@ -329,11 +328,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ir/joboona/Presentation/Controllers/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
+            <state relative-caret-position="528">
+              <caret line="72" column="73" selection-start-line="72" selection-start-column="73" selection-end-line="72" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ir/joboona/Services/AuthenticationService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="35" column="45" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -634,7 +642,7 @@
     <property name="SearchEverywhereHistoryKey" value="Project&#9;PSI&#9;JAVA://ir.joboona.Models.Project&#10;UserC&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/UserController.java&#10;User&#9;PSI&#9;JAVA://ir.joboona.Models.User&#10;UserInf&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/webapp/user_info.jsp&#10;Aut&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Services/AuthenticationService.java&#10;CorsF&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/configurations/CorsFilter.java&#10;Cors&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/configurations/CorsFilter.java&#10;Fil&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/configurations/AuthenticationFilter.java&#10;EM&#9;PSI&#9;JAVA://Solutions.Data.EntityManager&#10;ProjectSer&#9;PSI&#9;JAVA://ir.joboona.Services.ProjectService&#10;AuthSer&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Services/AuthenticationService.java&#10;Auth&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Services/AuthenticationService.java&#10;ProjectSee&#9;PSI&#9;JAVA://ir.joboona.Seeds.ProjectSeed&#10;Filter&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/configurations/AuthenticationFilter.java&#10;Dis&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Core/Dispatcher/Dispatcher.java&#10;UserSer&#9;PSI&#9;JAVA://ir.joboona.Services.UserService&#10;ؤعفا&#9;PSI&#9;JAVA://ir.joboona.Services.AuthenticationService&#10;Authe&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Services/AuthenticationService.java&#10;Dispa&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Core/Dispatcher/Dispatcher.java&#10;end&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Core/Dispatcher/EndPoint.java&#10;dispa&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Core/Dispatcher/Dispatcher.java&#10;Dispat&#9;PSI&#9;JAVA://Solutions.Core.Dispatcher.Dispatcher&#10;pom.xml&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/pom.xml&#10;Common&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/ControllerAdvices/Common/CommonControllerAdvice.java&#10;pom.&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/pom.xml&#10;UserRe&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Repositories/UserRepository.java&#10;UserCo&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/UserController.java&#10;UserSki&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Models/UserSkill.java&#10;UserSk&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Models/UserSkill.java&#10;pom&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/pom.xml&#10;skillContro&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/SkillController.java&#10;Skill&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/SkillController.java&#10;Mapper&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Data/BeanMapper.java&#10;آهن&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/configurations/HikariCPDataSource.java&#10;Factory&#9;PSI&#9;JAVA://Solutions.Data.Proxy.Manipulation.ModelProxyFactory&#10;Val&#9;PSI&#9;JAVA://Solutions.Data.Proxy.Trackers.ValueTypePersistenceSet&#10;SkillContr&#9;PSI&#9;JAVA://ir.joboona.Presentation.Controllers.SkillController&#10;UserContr&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/UserController.java&#10;Getter&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Data/Proxy/Trackers/GetterInterceptor.java&#10;GetInte&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Data/Proxy/Trackers/GetterInterceptor.java&#10;UserR&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Repositories/UserRepository.java&#10;ProjectRe&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Repositories/ProjectRepository.java&#10;Pro&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/ProjectController.java&#10;ProjectContro&#9;PSI&#9;JAVA://ir.joboona.Presentation.Controllers.ProjectController&#10;Proje&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Presentation/Controllers/ProjectController.java&#10;gett&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/Solutions/Data/Proxy/Trackers/GetterInterceptor.java&#10;ProjectContr&#9;PSI&#9;JAVA://ir.joboona.Presentation.Controllers.ProjectController&#10;Know&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Models/Knowledge.java&#10;ProjectS&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Models/ProjectSkill.java&#10;ProjectSkil&#9;FILE&#9;file:///home/mryf/IdeaProjects/jobonja/src/main/java/ir/joboona/Models/ProjectSkill.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558190953342" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558191421588" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ns-ca3" />
@@ -853,7 +861,7 @@
       <workItem from="1558109632890" duration="653000" />
       <workItem from="1558114678669" duration="599000" />
       <workItem from="1558118092269" duration="746000" />
-      <workItem from="1558190505591" duration="448000" />
+      <workItem from="1558190505591" duration="693000" />
     </task>
     <task id="LOCAL-00001" summary="Increase/decrease point while endorse/un-endorse. Adding `bidding` field in get/show end points of `ProjectController`.">
       <created>1554067223949</created>
@@ -932,11 +940,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558107925025</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Give token while registration.">
+      <created>1558191145988</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1558191145988</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408997000" />
+    <option name="totallyTimeSpent" value="409242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -1063,7 +1078,8 @@
     <MESSAGE value="Authentication (registration, token validation) is finished." />
     <MESSAGE value="iat added to JWT token" />
     <MESSAGE value="Auction Schedulable was written." />
-    <option name="LAST_COMMIT_MESSAGE" value="Auction Schedulable was written." />
+    <MESSAGE value="Give token while registration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Give token while registration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1575,13 +1591,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/user_info.jsp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ir/joboona/Services/AuthenticationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/WebstormProjects/job-oonja/src/pages/UserInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -1658,10 +1667,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ir/joboona/Services/AuthenticationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ir/joboona/Presentation/Controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
+        <state relative-caret-position="528">
+          <caret line="72" column="73" selection-start-line="72" selection-start-column="73" selection-end-line="72" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

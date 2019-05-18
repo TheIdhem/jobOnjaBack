@@ -52,11 +52,15 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User create (@RequestBody User user, HttpServletResponse response) throws Exception {
-        if(userRepository.findUserByUsername(user.getUsername()).isPresent())
+
+        String username = user.getUsername();
+
+        if(userRepository.findUserByUsername(username).isPresent())
             throw new DuplicateItemException(User.class, singleton("username"));
-        String token = authenticationService.generateJWT_Token(user);
-        response.addHeader("Authorization", token);
+
         userService.registerUser(user);
+        String token = authenticationService.generateJWT_Token(username);
+        response.addHeader("Authorization", token);
         return user;
     }
 
@@ -70,7 +74,7 @@ public class UserController {
         if (!BCrypt.checkpw(credentials.getPassword(), user.get().getPassword()))
             throw new Forbidden("گذرواژه نامعتبر است.");
 
-        String token = authenticationService.generateJWT_Token(user.get());
+        String token = authenticationService.generateJWT_Token(user.get().getUsername());
         resp.addHeader("Authorization", token);
         return user.get();
     }

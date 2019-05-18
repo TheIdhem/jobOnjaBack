@@ -33,7 +33,7 @@ public class AuthenticationService {
         return instance;
     }
 
-    public String generateJWT_Token(User user){
+    public String generateJWT_Token(String username){
 
         byte[] signingKey = JWT_SECRET.getBytes();
 
@@ -42,7 +42,7 @@ public class AuthenticationService {
                 .setHeaderParam("typ", TOKEN_TYPE)
                 .setIssuer(TOKEN_ISSUER)
                 .setIssuedAt(new Date())
-                .setSubject(user.getUsername())
+                .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + lifeTime))
                 .compact();
     }
