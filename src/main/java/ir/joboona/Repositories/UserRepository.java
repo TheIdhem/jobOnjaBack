@@ -1,6 +1,7 @@
 package ir.joboona.Repositories;
 
 import Solutions.Data.BeanMapper;
+import Solutions.Data.Cache;
 import Solutions.Data.EntityManager;
 import ir.joboona.Models.User;
 import ir.joboona.Repositories.common.Page;
@@ -16,6 +17,7 @@ public class UserRepository {
 
     private static UserRepository instance;
     private final EntityManager entityManager = EntityManager.getInstance();
+    private final Cache cache = Cache.getInstance();
 
     public static UserRepository getInstance() {
         if (instance == null)
@@ -54,7 +56,7 @@ public class UserRepository {
     }
 
     public Optional<User> findUserByUsername(String username) throws Exception {
-        return entityManager.queryForObject(connection -> {
+        Optional<User> result = entityManager.queryForObject(connection -> {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM User WHERE username = ?");
             ps.setString(1, username);
             try(ResultSet rs = ps.executeQuery()){
@@ -65,5 +67,7 @@ public class UserRepository {
                 return Optional.empty();
             }
         });
+        return result.map(user -> cache.assertObject(User.class, user.getId(), user));
+
     }
 }
