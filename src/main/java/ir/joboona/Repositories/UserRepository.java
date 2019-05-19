@@ -19,6 +19,9 @@ public class UserRepository {
     private final EntityManager entityManager = EntityManager.getInstance();
     private final Cache cache = Cache.getInstance();
 
+    private UserRepository() {
+    }
+
     public static UserRepository getInstance() {
         if (instance == null)
             instance = new UserRepository();

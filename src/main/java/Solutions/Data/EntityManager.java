@@ -109,9 +109,21 @@ public class EntityManager {
                     if (asList(oneToMany.cascade()).contains(CascadeType.PERSIST)) {
                         if (f.isAnnotationPresent(JoinColumn.class)) {
                             Object entityList = getFieldValue(f, o);
-                            if (entityList != null)
-                                for(Object e : (Collection) entityList)
-                                    save((Entity) e);
+                            if (entityList != null) {
+                                Iterator iterator = ((Iterable) entityList).iterator();
+                                List temp = new ArrayList();
+                                while (iterator.hasNext()) {
+                                    Entity e = (Entity) iterator.next();
+                                    save(e);
+                                    if (!(e instanceof ModelProxy)) {
+                                        iterator.remove();
+                                        Optional<Entity> sub = find((Class<Entity>)e.getClass(),
+                                                (Serializable) getFieldValue(getIdField(e.getClass()), e));
+                                        temp.add(sub.get());
+                                    }
+                                }
+                                ((Collection) entityList).addAll(temp);
+                            }
                         }
                     }
                 } else if (f.isAnnotationPresent(CollectionTable.class)) {

@@ -13,9 +13,8 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         // Do stuff during webapp's startup.
         try {
-            String[] args = new String[100];
             solutionsApplication = SolutionsApplication.getInstance();
-            solutionsApplication.run(args);
+            solutionsApplication.run();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

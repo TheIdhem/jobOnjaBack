@@ -22,7 +22,7 @@ public class SolutionsApplication {
         return instance;
     }
 
-    public void run(String[] args) throws Exception {
+    public void run() throws Exception {
 
         ApplicationProperties.init();
         EntityManager.init();
