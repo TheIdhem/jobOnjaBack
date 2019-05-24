@@ -1,6 +1,9 @@
 package Solutions.Data;
 
-import javafx.util.Pair;
+
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -22,9 +25,9 @@ public class Cache {
 
     @SuppressWarnings("unchecked")
     public <T> T assertObject(Class<T> clazz, Serializable id, T proxy){
-        T cached = (T) store.get(new Pair<Class, Serializable>(clazz, id));
+        T cached = (T) store.get(new ImmutablePair<Class, Serializable>(clazz, id));
         if (cached == null) {
-            store.put(new Pair<>(clazz, id), proxy);
+            store.put(new ImmutablePair<>(clazz, id), proxy);
             return proxy;
         }else
             return cached;
@@ -32,7 +35,7 @@ public class Cache {
 
     @SuppressWarnings("unchecked")
     public <T> T getObject(Class<T> clazz, Serializable id){
-        return (T) store.get(new Pair<Class, Serializable>(clazz, id));
+        return (T) store.get(new ImmutablePair<Class, Serializable>(clazz, id));
     }
 
 }
