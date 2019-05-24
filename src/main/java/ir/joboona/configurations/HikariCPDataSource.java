@@ -14,9 +14,11 @@ public class HikariCPDataSource implements ApplicationDataBaseConnectionProvider
      
     public HikariCPDataSource() {
         HikariConfig config = new HikariConfig();
-        config.setPoolName("SQLitePool");
-        config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/home/mryf/IdeaProjects/jobonja/identifier.sqlite");
+        config.setPoolName("IE");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/IE");
+        config.setUsername("root");
+        config.setPassword("Abcd12345");
         config.setConnectionTestQuery("SELECT * FROM User");
         config.setMaxLifetime(60000); // 60 Sec
         config.setIdleTimeout(45000); // 45 Sec
