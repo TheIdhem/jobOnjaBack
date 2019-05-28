@@ -7,7 +7,6 @@ COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
 RUN echo koonet pare agha sadegh
-RUN mkdir /db
 
 RUN mvn clean package
 
