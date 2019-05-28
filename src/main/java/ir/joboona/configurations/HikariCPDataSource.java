@@ -16,7 +16,7 @@ public class HikariCPDataSource implements ApplicationDataBaseConnectionProvider
         HikariConfig config = new HikariConfig();
         config.setPoolName("SQLitePool");
         config.setDriverClassName("org.sqlite.JDBC");
-        config.setJdbcUrl("jdbc:sqlite:/home/mryf/IdeaProjects/jobonja/identifier.sqlite");
+        config.setJdbcUrl("jdbc:sqlite:/db/identifier.sqlite");
         config.setConnectionTestQuery("SELECT * FROM User");
         config.setMaxLifetime(60000); // 60 Sec
         config.setIdleTimeout(45000); // 45 Sec
