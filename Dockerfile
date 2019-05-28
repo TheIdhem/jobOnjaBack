@@ -8,7 +8,8 @@ COPY src /tmp/src/
 WORKDIR /tmp/
 RUN echo koonet pare agha sadegh
 RUN mkdir /db
-RUN mvn clean package
+
+#RUN mvn clean package
 
 
 COPY --from=MAVEN_TOOL_CHAIN /tmp/target/wizard*.war $CATALINA_HOME/webapps/wizard.war
