@@ -41,7 +41,7 @@ public class Dispatcher extends HttpServlet {
         RequestMethod requestMethod = RequestMethod.valueOf(req.getMethod());
         String path = req.getRequestURI();
         Optional<EndPoint> handler = endPoints.stream().sorted(comparing(EndPoint::getPriority))
-                .filter(endPoint -> endPoint.matches(requestMethod, path)).findFirst();
+                .filter(endPoint -> endPoint.matches(requestMethod, path.substring(8))).findFirst();
         try{
             if (!handler.isPresent()) {
                 throw new NoSuchEndPoint(requestMethod, path);

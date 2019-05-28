@@ -21,8 +21,8 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        if (req.getRequestURI().equals("/user") && req.getMethod().equals("POST") ||
-                req.getRequestURI().equals("/user/login"))
+        if (req.getRequestURI().equals("/jobonja/user") && req.getMethod().equals("POST") ||
+                req.getRequestURI().equals("/jobonja/user/login"))
             chain.doFilter(request, response);
         else {
 
